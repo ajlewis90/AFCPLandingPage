@@ -1,0 +1,209 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'landing_page_head.html' %}
+    <meta name="title" content="AFCP | B2B Partnership" />
+    <meta name="description" content="Partner with AFCP.ai to enhance your business with personalized, AI-powered and frictionless shopping solutions. Learn more about our B2B opportunities!" />
+    <style>
+        .image-placeholder {
+            width: 100%;
+            max-height: 400px; /* Increased max height for better visibility */
+            background-color: transparent;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden; /* Prevent overflow */
+        }
+        .image-placeholder img {
+            width: 100%;
+            height: auto; /* Allow natural height */
+            max-height: 400px; /* Cap height to prevent oversized images */
+            object-fit: contain; /* Show full image without cropping */
+            border-radius: 10px;
+            display: block; /* Remove bottom gap */
+        }
+        @media (max-width: 991px) {
+            .order-first {
+                order: 0;
+            }
+            .image-placeholder {
+                max-height: 300px; /* Smaller height for mobile */
+            }
+            .image-placeholder img {
+                max-height: 300px;
+            }
+        }
+        @media (max-width: 576px) {
+            .image-placeholder {
+                max-height: 250px; /* Further reduce for small screens */
+            }
+            .image-placeholder img {
+                max-height: 250px;
+            }
+        }
+
+        /* Scoped CSS for masthead form */
+        .masthead .signup-form .form-content {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .masthead .signup-form .form-group {
+            margin-bottom: 15px; /* Space between rows */
+        }
+        .masthead .signup-form .subscribe-controls {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            color: #333;
+        }
+        .masthead .signup-form .subscribe-controls:focus {
+            outline: none;
+            border-color: #e09900; /* Match previous orange placeholder color for focus */
+            box-shadow: 0 0 5px rgba(224, 153, 0, 0.5);
+        }
+
+        .masthead .signup-form .spam-warning-text {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .masthead .signup-form .form-group {
+                margin-bottom: 10px;
+            }
+            .masthead .signup-form .subscribe-controls {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .masthead .signup-form .btn-sign-up-daxedax {
+                font-size: 14px;
+                padding: 10px;
+            }
+            /* Ensure fields stack vertically on smaller screens */
+            .masthead .signup-form .col-md-6 {
+                width: 100%;
+            }
+        }
+        @media (max-width: 576px) {
+            .masthead .signup-form .subscribe-controls {
+                font-size: 13px;
+            }
+            .masthead .signup-form .btn-sign-up-daxedax {
+                font-size: 13px;
+            }
+            .masthead .signup-form .spam-warning-text {
+                font-size: 12px;
+            }
+        }        
+    </style>
+</head>
+<body>
+    {% include 'landing_page_navigation.html' %}
+
+    <!-- Hero Section (Centered, Full-Width) -->
+    <section class="pt-8" id="home-old" style="background-color: #1d1d1d !important;">
+        <div class="container-fluid px-7 mid-container">
+            <div class="row display-flex justify-content-md-center">
+                <div class="col-md-8 text-center">
+                    <h1 style="color: #ffffff;">Commerce made effortless</h1>
+                    <p class="lead mt-4 mb-5" style="color: #ffffff;">Empower your business with our AI-powered shopping buddy. DaxeDax delivers personalized, efficient, and delightful shopping experiences for your customers.</p>
+                    <div class="top-btn-block wow fadeInUp" data-wow-duration="2.5s">
+                        <a href="#business-signup" class="btn btn-sign-up-daxedax btn-md">Partner with us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </section>
+
+    <!-- Feature Highlights Section (Text on Left, Image on Right) -->
+    <section class="py-5" style="background-color: #1d1d1d !important;">
+        <div class="container-fluid px-7 mid-container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto my-auto text-left">
+                    <h2 class="mission" style="color: #ffffff;">Entertain your customers</h2>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="lead mt-4 mb-5" style="color: #ffffff;">Entertain your customers with tools that empower and delight your customers. Make them happy. Attract customers to your brand story. Sell products, make offers and engage with communities on your offerings.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mx-auto my-auto text-center order-first order-lg-2">
+                    <p>                                    
+                        <img src="{% static 'img/entertain-your-customers-min.jpg' %}" class="img-fluid rounded" alt="Customers being entertained" />
+                    </p>                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section (Image on Left, Text on Right) -->
+    <section class="py-5" style="background-color: #1d1d1d !important;">
+        <div class="container-fluid px-7 mid-container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto my-auto text-center">
+                    <p>
+                        <img src="{% static 'img/know-your-customers-min.png' %}" class="img-fluid rounded" alt="Know Your Customers">
+                    </p>
+                </div>
+                <div class="col-lg-6 mx-auto my-auto text-left order-first order-lg-2">
+                    <h2 class="mission" style="color: #ffffff;">Know your customers</h2>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="lead mt-4 mb-5" style="color: #ffffff;">Get to know the mind of your customers like a friend. Get deep insights on who they are, what they like and where they are.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Highlights Section (Text on Left, Image on Right) -->
+    <section class="py-5" style="background-color: #1d1d1d !important;">
+        <div class="container-fluid px-7 mid-container">
+            <div class="row">
+                <div class="col-lg-4 mx-auto my-auto text-left">
+                    <h2 class="mission" style="color: #ffffff;">Grow your business</h2>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="lead mt-4 mb-5" style="color: #ffffff;">Grow your customer base, increase your bottomline, sell faster and do not hold onto inventory. Stay ahead by leveraging our Artificial Intelligence platform.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 mx-auto my-auto text-center order-first order-lg-2">
+                    <p>                                    
+                        <img src="{% static 'img/grow-your-business-min.jpg' %}" class="img-fluid rounded" alt="Grow your business" />
+                    </p>                      
+                </div>
+            </div>
+        </div>
+
+                <div class="row">
+                    <div class="col-lg-12 mx-auto my-auto text-left">
+
+                    </div>
+                </div>                    
+            </div>
+            <div id="business-signup"></div>
+        </div>
+    </section>            
+
+   
+    {% include 'business_sign_up.html' %}
+
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery.lazyloadxt.js' %}"></script>
+
+    <script src="{% static 'js/business_signup_page_ending_scripts.js' %}"></script>    
+
+    <!-- Footer -->
+    {% include 'landing_page_footer.html' %}
+
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery.lazyloadxt.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% load static %}
+<nav class="navbar navbar-expand-md navbar-light bg-custom-green fixed-top sticky-navigation">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'landing_page:landing_page' %}">
+            <img style="max-width:200px;" src="{% static 'img/daxedax-default-monochrome.png' %}" alt="Daxedax monochrome white logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>		
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                {% if business_sign_up %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#business-signup">Partner With Us</a>
+                    </li>                
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#signup">Join Us</a>
+                    </li>                 
+                {% endif %}	
+		
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'landing_page:b2b_signup_page' %}">B2B Partners</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact-footer" class="nav-link">Contact</a>
+                </li>			
+            </ul>
+        </div>		
+    </div>
+</nav>

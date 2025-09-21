@@ -1,0 +1,180 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script>{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'landing_page_head.html' %}
+    <meta name="title" content="DaxeDax | B2B Partnership" />
+    <meta name="description" content="Partner with DaxeDax.ai to enhance your business with personalized, AI-powered shopping solutions. Learn more about our B2B opportunities!" />
+    <style>
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #e0e0e0; /* Placeholder gray */
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 991px) {
+            .order-first {
+                order: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'landing_page_navigation.html' %}
+
+    <!-- Hero Section (Centered, Full-Width) -->
+    <section class="pt-8" id="home-old" style="background-color: #1d1d1d !important;">
+        <div class="container-fluid px-7 mid-container">
+            <div class="row display-flex justify-content-md-center">
+                <div class="col-md-8 text-center">
+                    <h1 style="color: #ffffff;">Partner with AFCP.ai</h1>
+                    <p class="lead mt-4 mb-5" style="color: #ffffff;">Empower your business with our AI-powered shopping buddy. DaxeDax delivers personalized, efficient, and delightful shopping experiences for your customers.</p>
+                    <div class="top-btn-block wow fadeInUp" data-wow-duration="2.5s">
+                        <a href="#contact-footer" class="btn btn-sign-up-daxedax btn-md">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </section>
+
+    <!-- Feature Highlights Section (Text on Left, Image on Right) -->
+    <section class="py-5" style="background-color: #1d1d1d !important;">
+        <div class="container-fluid px-7 mid-container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto my-auto text-left">
+                    <h2 class="mission" style="color: #ffffff;">Why Partner with DaxeDax?</h2>
+                    <div class="row">
+                        <div class="col-12">
+                            <i class="material-icons icon-font">loyalty</i>
+                            <h3 class="benefit" style="color: #ffffff;">Boost Customer Loyalty</h3>
+                            <p class="benefit-text" style="color: #ffffff;">DaxeDax personalizes shopping, increasing engagement and repeat purchases for your brand.</p>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <i class="material-icons icon-font">trending_up</i>
+                            <h3 class="benefit" style="color: #ffffff;">Streamline Operations</h3>
+                            <p class="benefit-text" style="color: #ffffff;">Our AI predicts customer needs, reducing cart abandonment and optimizing inventory.</p>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <i class="material-icons icon-font">integration_instructions</i>
+                            <h3 class="benefit" style="color: #ffffff;">Seamless Integration</h3>
+                            <p class="benefit-text" style="color: #ffffff;">Easily integrate DaxeDax with your e-commerce platform for a hassle-free experience.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mx-auto my-auto text-center order-first order-lg-2">
+                    <div class="image-placeholder" style="background-color: #e09900;"></div> <!-- Orange placeholder -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section (Image on Left, Text on Right) -->
+    <section class="py-5" style="background-color: #1d1d1d !important;">
+        <div class="container-fluid px-7 mid-container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto my-auto text-center">
+                    <div class="image-placeholder" style="background-color: #b78ad8;"></div> <!-- Purple placeholder for profile -->
+                </div>
+                <div class="col-lg-6 mx-auto my-auto text-left order-first order-lg-2">
+                    <h2 class="mission" style="color: #ffffff;">What Our Partners Say</h2>
+                    <blockquote>
+                        <p class="story-text" style="color: #ffffff;">"DaxeDax transformed our e-commerce platform by making shopping more intuitive for our customers. We've seen a 30% increase in repeat purchases since integrating their AI buddy!"</p>
+                        <footer class="source" style="color: #ffffff;">— Jane Doe, CEO of ShopEasy</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats/Impact Section (Text on Left, Image on Right) -->
+    <section class="py-5" style="background-color: #1d1d1d !important;">
+        <div class="container-fluid px-7 mid-container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto my-auto text-left">
+                    <h2 class="mission" style="color: #ffffff;">Our Impact</h2>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3 class="stakes-number" style="color: #ffffff;">500+</h3>
+                            <p class="stakes-text" style="color: #ffffff;">Businesses partnered with DaxeDax</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3 class="stakes-number" style="color: #ffffff;">1M+</h3>
+                            <p class="stakes-text" style="color: #ffffff;">Shopping recommendations made</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3 class="stakes-number" style="color: #ffffff;">25%</h3>
+                            <p class="stakes-text" style="color: #ffffff;">Average increase in customer retention</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mx-auto my-auto text-center order-first order-lg-2">
+                    <div class="image-placeholder" style="background-color: #e41f45;"></div> <!-- Red placeholder -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secondary CTA Section (Image on Left, Text on Right) -->
+    <section class="subscribesection py-5" style="background-color: #1d1d1d !important;">
+        <div class="container-fluid px-7 mid-container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto my-auto text-center">
+                    <div class="image-placeholder" style="background-color: #091b98;"></div> <!-- Dark blue placeholder -->
+                </div>
+                <div class="col-lg-6 mx-auto my-auto text-left order-first order-lg-2">
+                    <h2 class="mission" style="color: #ffffff;">Ready to Transform Your Business?</h2>
+                    <p class="banner-text" style="color: #ffffff;">Join the growing list of businesses using DaxeDax to create smarter, more personalized shopping experiences.</p>
+                    <a href="#contact-footer" class="btn btn-sign-up-daxedax btn-md">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'landing_page_footer.html' %}
+
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery.lazyloadxt.js' %}"></script>
+</body>
+</html>
