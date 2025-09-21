@@ -8,7 +8,6 @@
     {% include 'landing_page_head.html' %}
     {% include 'image_lazy_load_script.html' %}
 
-    {% include 'new_google_analytics_script.html' %}
     <style>
     header.masthead {
     position: relative;
@@ -64,133 +63,133 @@
                         <!-- Tab Navigation -->
                         <div class="tab-navigation-container" style="margin-bottom: 4rem;">
                             <div class="tab-navigation d-flex justify-content-center flex-wrap" style="gap: 0.5rem; margin-bottom: 2rem;">
-                                <button class="tab-button active" data-tab="shop-local" style="background: #212529; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
-                                    🛒 Shop Local
+                                <button class="tab-button active" data-tab="chat" style="background: #000000; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                                    💬 Chat
                                 </button>
-                                <button class="tab-button" data-tab="culture-hub" style="background: transparent; color: #ffffff; border: 2px solid #ffffff; padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
-                                    🎭 Culture Hub
+                                <button class="tab-button" data-tab="voice" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🎙️ Voice
                                 </button>
-                                <button class="tab-button" data-tab="recipe-vault" style="background: transparent; color: #ffffff; border: 2px solid #ffffff; padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
-                                    👨‍🍳 Recipe Vault
+                                <button class="tab-button" data-tab="personalization" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🎯 Personalization
                                 </button>
-                                <button class="tab-button" data-tab="community" style="background: transparent; color: #ffffff; border: 2px solid #ffffff; padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
-                                    🤝 Community
+                                <button class="tab-button" data-tab="make-offers" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    💰 Make Offers
                                 </button>
-                                <button class="tab-button" data-tab="delivery" style="background: transparent; color: #ffffff; border: 2px solid #ffffff; padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
-                                    🚚 Delivery
+                                <button class="tab-button" data-tab="engagement" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🎮 Engagement
                                 </button>
-                                <button class="tab-button" data-tab="merchants" style="background: transparent; color: #ffffff; border: 2px solid #ffffff; padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
-                                    🏪 Merchants
+                                <button class="tab-button" data-tab="sell-products" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🏪 Sell Products
                                 </button>
                             </div>
                         </div>
 
                         <!-- Tab Content -->
                         <div class="tab-content-container">
-                            <!-- Shop Local Tab -->
-                            <div class="tab-content active" id="shop-local">
+                            <!-- Chat Tab -->
+                            <div class="tab-content active" id="chat">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 text-left">
-                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Discover Authentic African Products</h2>
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Chat with DaxeDax</h2>
                                         <div class="feature-list">
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🌿 Find traditional spices from local farmers</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🛍️ Shop handcrafted goods from African artisans</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🌾 Access organic ingredients for authentic meals</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">💝 Support local communities with every purchase</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">💬 Natural conversation with your shopping assistant</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🔍 Ask questions and get instant product recommendations</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📱 Available 24/7 through chat interface</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎯 Understands your preferences and shopping style</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <img src="{% static 'img/cart-shop.jpg' %}" class="img-fluid rounded" alt="African marketplace with local products" style="max-height: 400px; object-fit: cover;" />
+                                        <img src="{% static 'img/cart-shop.jpg' %}" class="img-fluid rounded" alt="Chat interface with shopping assistant" style="max-height: 400px; object-fit: cover;" />
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Culture Hub Tab -->
-                            <div class="tab-content" id="culture-hub" style="display: none;">
+                            <!-- Voice Tab -->
+                            <div class="tab-content" id="voice" style="display: none;">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 text-left">
-                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Explore Rich African Heritage</h2>
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Voice Shopping Experience</h2>
                                         <div class="feature-list">
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📚 Learn about diverse African traditions</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎵 Discover music and art from across Africa</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">👥 Connect with cultural communities</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎉 Join cultural events and celebrations</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎙️ Speak naturally to place orders and get help</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🗣️ Hands-free shopping while cooking or multitasking</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🌍 Multi-language support for diverse communities</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎵 Audio feedback and confirmation for all actions</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <img src="{% static 'img/about-us-pic.png' %}" class="img-fluid rounded" alt="African cultural celebration" style="max-height: 400px; object-fit: cover;" />
+                                        <img src="{% static 'img/about-us-pic.png' %}" class="img-fluid rounded" alt="Voice shopping interface" style="max-height: 400px; object-fit: cover;" />
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Recipe Vault Tab -->
-                            <div class="tab-content" id="recipe-vault" style="display: none;">
+                            <!-- Personalization Tab -->
+                            <div class="tab-content" id="personalization" style="display: none;">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 text-left">
-                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Master Traditional African Cuisine</h2>
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Personalized Just For You</h2>
                                         <div class="feature-list">
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🍲 Access thousands of authentic recipes</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">👨‍🍳 Learn from experienced African chefs</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📖 Step-by-step cooking instructions</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🥘 From appetizers to traditional desserts</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎯 Custom product recommendations based on your tastes</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📊 Learning algorithm that improves with every interaction</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🏠 Tailored to your household size and dietary preferences</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">⏰ Smart reminders for recurring purchases</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <img src="{% static 'img/family-prep-meal-min.jpg' %}" class="img-fluid rounded" alt="African family preparing traditional meal" style="max-height: 400px; object-fit: cover;" />
+                                        <img src="{% static 'img/family-prep-meal-min.jpg' %}" class="img-fluid rounded" alt="Personalized shopping experience" style="max-height: 400px; object-fit: cover;" />
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Community Tab -->
-                            <div class="tab-content" id="community" style="display: none;">
+                            <!-- Make Offers Tab -->
+                            <div class="tab-content" id="make-offers" style="display: none;">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 text-left">
-                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Build Meaningful Connections</h2>
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Smart Offers & Deals</h2>
                                         <div class="feature-list">
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">👥 Connect with African diaspora worldwide</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">💬 Share experiences and stories</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🤝 Support each other's journeys</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🌍 Create lasting friendships globally</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">💰 Personalized deals based on your shopping history</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎁 Surprise offers and seasonal promotions</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">👥 Group buying opportunities for better prices</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🏷️ Exclusive member discounts and early access</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <img src="{% static 'img/happy-family.jpg' %}" class="img-fluid rounded" alt="Happy African community" style="max-height: 400px; object-fit: cover;" />
+                                        <img src="{% static 'img/happy-family.jpg' %}" class="img-fluid rounded" alt="Special offers and deals" style="max-height: 400px; object-fit: cover;" />
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Delivery Tab -->
-                            <div class="tab-content" id="delivery" style="display: none;">
+                            <!-- Engagement Tab -->
+                            <div class="tab-content" id="engagement" style="display: none;">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 text-left">
-                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Fast & Reliable Delivery</h2>
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Engaging Shopping Experience</h2>
                                         <div class="feature-list">
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🚚 Same-day delivery in major cities</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📦 Secure packaging for fresh products</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📍 Real-time tracking for all orders</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">❄️ Temperature-controlled transport</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎮 Gamified shopping with rewards and achievements</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📚 Interactive cooking tutorials and cultural stories</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎉 Community challenges and seasonal events</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">⭐ Rating and review system with social features</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <img src="{% static 'img/courier-with-delivery-cardboard-box-by-car.jpg' %}" class="img-fluid rounded" alt="Delivery service" style="max-height: 400px; object-fit: cover;" />
+                                        <img src="{% static 'img/courier-with-delivery-cardboard-box-by-car.jpg' %}" class="img-fluid rounded" alt="Engaging shopping platform" style="max-height: 400px; object-fit: cover;" />
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Merchants Tab -->
-                            <div class="tab-content" id="merchants" style="display: none;">
+                            <!-- Sell Products Tab -->
+                            <div class="tab-content" id="sell-products" style="display: none;">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 text-left">
-                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Partner With Us</h2>
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Sell Your Products</h2>
                                         <div class="feature-list">
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🏪 List your African products easily</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">💰 Competitive commission rates</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📈 Access to growing customer base</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🛠️ Full merchant support and tools</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🏪 Easy product listing with AI-powered descriptions</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">💰 Competitive commission rates and transparent pricing</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📈 Analytics dashboard to track sales and performance</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🛠️ Full merchant support and marketing tools</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <img src="{% static 'img/grow-your-business.jpg' %}" class="img-fluid rounded" alt="Growing business partnership" style="max-height: 400px; object-fit: cover;" />
+                                        <img src="{% static 'img/grow-your-business.jpg' %}" class="img-fluid rounded" alt="Sell products platform" style="max-height: 400px; object-fit: cover;" />
                                     </div>
                                 </div>
                             </div>
@@ -228,9 +227,11 @@
                     // Remove active class from all buttons and contents
                     tabButtons.forEach(btn => {
                         btn.classList.remove('active');
-                        btn.style.background = 'transparent';
+                        btn.style.background = 'rgba(255, 255, 255, 0.1)';
                         btn.style.color = '#ffffff';
-                        btn.style.border = '2px solid #ffffff';
+                        btn.style.border = '1px solid rgba(255, 255, 255, 0.3)';
+                        btn.style.fontWeight = '500';
+                        btn.style.boxShadow = 'none';
                     });
 
                     tabContents.forEach(content => {
@@ -240,9 +241,11 @@
 
                     // Add active class to clicked button and corresponding content
                     this.classList.add('active');
-                    this.style.background = '#212529';
+                    this.style.background = '#000000';
                     this.style.color = 'white';
                     this.style.border = 'none';
+                    this.style.fontWeight = '600';
+                    this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
 
                     const targetContent = document.getElementById(targetTab);
                     targetContent.classList.add('active');
@@ -254,13 +257,15 @@
             tabButtons.forEach(button => {
                 button.addEventListener('mouseenter', function() {
                     if (!this.classList.contains('active')) {
-                        this.style.background = 'rgba(255, 255, 255, 0.1)';
+                        this.style.background = 'rgba(255, 255, 255, 0.2)';
+                        this.style.border = '1px solid rgba(255, 255, 255, 0.5)';
                     }
                 });
 
                 button.addEventListener('mouseleave', function() {
                     if (!this.classList.contains('active')) {
-                        this.style.background = 'transparent';
+                        this.style.background = 'rgba(255, 255, 255, 0.1)';
+                        this.style.border = '1px solid rgba(255, 255, 255, 0.3)';
                     }
                 });
             });
