@@ -60,59 +60,142 @@
        <section class="pt-8 px-5" id="home">
              <div class="container-fluid px-7 mid-container">
                  <div class="row">
-                    <div class="col-lg-12 mx-auto my-auto text-left">
-                        <h2 class="mission text-center">Our Manifesto</h2>
-                        <p class="banner-text" style="padding-top: 4%;">
-							               As a child in a small Mumbai suburb, Dax was captivated by kites their freedom, their dance in the sky. But with little pocket money, buying them was a challenge. 
-                        </p>
+                    <div class="col-lg-12 mx-auto my-auto text-center">
+                        <!-- Tab Navigation -->
+                        <div class="tab-navigation-container" style="margin-bottom: 4rem;">
+                            <div class="tab-navigation d-flex justify-content-center flex-wrap" style="gap: 0.5rem; margin-bottom: 2rem;">
+                                <button class="tab-button active" data-tab="shop-local" style="background: #212529; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🛒 Shop Local
+                                </button>
+                                <button class="tab-button" data-tab="culture-hub" style="background: transparent; color: #ffffff; border: 2px solid #ffffff; padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🎭 Culture Hub
+                                </button>
+                                <button class="tab-button" data-tab="recipe-vault" style="background: transparent; color: #ffffff; border: 2px solid #ffffff; padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    👨‍🍳 Recipe Vault
+                                </button>
+                                <button class="tab-button" data-tab="community" style="background: transparent; color: #ffffff; border: 2px solid #ffffff; padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🤝 Community
+                                </button>
+                                <button class="tab-button" data-tab="delivery" style="background: transparent; color: #ffffff; border: 2px solid #ffffff; padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🚚 Delivery
+                                </button>
+                                <button class="tab-button" data-tab="merchants" style="background: transparent; color: #ffffff; border: 2px solid #ffffff; padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🏪 Merchants
+                                </button>
+                            </div>
+                        </div>
 
-  					           <p class="banner-text">
-                        His parents gave him a few rupees only when he ran errands, which sparked an idea: if errands got him kites, why not run them for the whole neighborhood?
-  					           </p>
+                        <!-- Tab Content -->
+                        <div class="tab-content-container">
+                            <!-- Shop Local Tab -->
+                            <div class="tab-content active" id="shop-local">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 text-left">
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Discover Authentic African Products</h2>
+                                        <div class="feature-list">
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🌿 Find traditional spices from local farmers</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🛍️ Shop handcrafted goods from African artisans</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🌾 Access organic ingredients for authentic meals</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">💝 Support local communities with every purchase</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{% static 'img/cart-shop.jpg' %}" class="img-fluid rounded" alt="African marketplace with local products" style="max-height: 400px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
 
-					             <p class="banner-text">
-							           So, he knocked on doors, offering to fetch groceries and help with small tasks. What started as a way to earn kite money quickly became something more. Dax began to understand people's needs before they voiced them their preferred rice brands, when essentials ran low, even the exact day they'd need a refill. <b><i>He became the invisible helper who kept households running smoothly</i></b>.
-					             </p>
+                            <!-- Culture Hub Tab -->
+                            <div class="tab-content" id="culture-hub" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 text-left">
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Explore Rich African Heritage</h2>
+                                        <div class="feature-list">
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📚 Learn about diverse African traditions</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎵 Discover music and art from across Africa</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">👥 Connect with cultural communities</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎉 Join cultural events and celebrations</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{% static 'img/about-us-pic.png' %}" class="img-fluid rounded" alt="African cultural celebration" style="max-height: 400px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
 
-                       <p class="banner-text">
-                        That spark never left him. What began as simple errands turned into a deeper joy: the thrill of anticipating, surprising, and delighting others. It reminded him of someone he admired as a child: <b><i>Santa Claus</i></b>.
-                       </p>
+                            <!-- Recipe Vault Tab -->
+                            <div class="tab-content" id="recipe-vault" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 text-left">
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Master Traditional African Cuisine</h2>
+                                        <div class="feature-list">
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🍲 Access thousands of authentic recipes</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">👨‍🍳 Learn from experienced African chefs</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📖 Step-by-step cooking instructions</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🥘 From appetizers to traditional desserts</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{% static 'img/family-prep-meal-min.jpg' %}" class="img-fluid rounded" alt="African family preparing traditional meal" style="max-height: 400px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
 
-                       <p class="banner-text">
-                        <b>To Dax, Santa wasn't just a man in a red suit, but the ultimate symbol of thoughtful giving; the kind that comes from truly knowing someone's wishes before they are even spoken.</b> Every Christmas season, Dax would often dress up as Santa, not just to hand out gifts, but to <b><i>recreate that magical feeling of connection, surprise and delight for people around him</i></b>.
-                       </p>                                                                 
-					       
-                      <p class="banner-text">
-                        Years later, after moving to New Zealand, that feeling never left him. What if this kind of connection, trust, and ability to magically predict needs like Santa could be scaled to help shoppers everywhere?
-					            </p>
+                            <!-- Community Tab -->
+                            <div class="tab-content" id="community" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 text-left">
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Build Meaningful Connections</h2>
+                                        <div class="feature-list">
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">👥 Connect with African diaspora worldwide</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">💬 Share experiences and stories</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🤝 Support each other's journeys</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🌍 Create lasting friendships globally</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{% static 'img/happy-family.jpg' %}" class="img-fluid rounded" alt="Happy African community" style="max-height: 400px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!-- Delivery Tab -->
+                            <div class="tab-content" id="delivery" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 text-left">
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Fast & Reliable Delivery</h2>
+                                        <div class="feature-list">
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🚚 Same-day delivery in major cities</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📦 Secure packaging for fresh products</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📍 Real-time tracking for all orders</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">❄️ Temperature-controlled transport</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{% static 'img/courier-with-delivery-cardboard-box-by-car.jpg' %}" class="img-fluid rounded" alt="Delivery service" style="max-height: 400px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
 
-                       <p class="banner-text">
-                        Today, online shopping is cold, impersonal, solitary experience, and is often overwhelming. Rising costs and endless options add to the frustration.<br/>
-                        If this continues, billions of online shoppers worldwide would continue to feel disconnected, unsupported and frustrated.
-                       </p>
-
-                        <p class="banner-text">
-                          Shopping experiences need joy, connection, community and a soul. Shoppers need a friend like Dax or Santa who can remind them about kindness, the spirit of giving and keeping people first during tough times.
-                        </p>                      
-					    
-                      <h3 class="" style="padding-top:5%; padding-bottom:3.5%; color:#ffffff;">What if every shopper in the world could have a Santa in their pocket?</h3>
-
-					           <p class="banner-text" style="padding-bottom:5%;">
-							         That's why Dax and the Mackzan team are building <b><i>Daxedax</i></b>. Daxedax is the world's first magical shopping solution where you can shop for anything like magic.<br/><br/>
-                       The solution is like having a digital Santa that makes shopping magical, simple and joyful. But unlike the real Santa who turns up once a year, Daxedax shows up exactly when you need him, readily bringing you the right products at the right time, just like magic!!!<br><br>
-                       <b><i>Daxedax's vision is to empower every shopper in the world to shop anything.</i></b>
-					           </p>
-
-                     <p class="banner-text" style="padding-bottom:5%;">
-                       <b><i>Join us at Daxedax to make shopping effortlessly intelligent, and deeply personal for everyone, everywhere.</i></b>
-                     </p>
-					</div>
-					<div class="row">
-						<div class="col-lg-12 mx-auto my-auto text-left">
-
-						</div>
-					</div>                    
+                            <!-- Merchants Tab -->
+                            <div class="tab-content" id="merchants" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 text-left">
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Partner With Us</h2>
+                                        <div class="feature-list">
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🏪 List your African products easily</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">💰 Competitive commission rates</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📈 Access to growing customer base</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🛠️ Full merchant support and tools</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{% static 'img/grow-your-business.jpg' %}" class="img-fluid rounded" alt="Growing business partnership" style="max-height: 400px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                  
                  </div>
                  <div id="signup"></div>
              </div>
@@ -129,7 +212,60 @@
         <script src="{% static 'js/feather.min.js' %}"></script>
         <script src="{% static 'js/scripts.js' %}"></script>
 
-        <script src="{% static 'js/landing_page_ending_js_scripts.js' %}"></script>
+        <script src="{% static 'js/landing_page_ending_js_scripts.js' %}">
+        </script>
+
+        <!-- Tab Switching JavaScript -->
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.style.background = 'transparent';
+                        btn.style.color = '#ffffff';
+                        btn.style.border = '2px solid #ffffff';
+                    });
+
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        content.style.display = 'none';
+                    });
+
+                    // Add active class to clicked button and corresponding content
+                    this.classList.add('active');
+                    this.style.background = '#212529';
+                    this.style.color = 'white';
+                    this.style.border = 'none';
+
+                    const targetContent = document.getElementById(targetTab);
+                    targetContent.classList.add('active');
+                    targetContent.style.display = 'block';
+                });
+            });
+
+            // Add hover effects
+            tabButtons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.background = 'rgba(255, 255, 255, 0.1)';
+                    }
+                });
+
+                button.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.background = 'transparent';
+                    }
+                });
+            });
+        });
+        </script>
 
 
     </body>
