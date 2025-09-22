@@ -1,0 +1,138 @@
+{% load static %}
+       <section class="pt-4 pb-8 px-5" id="home">
+             <div class="container-fluid px-7 mid-container">
+                 <div class="row">
+                    <div class="col-lg-12 mx-auto my-auto text-center">
+                        <!-- Tab Navigation -->
+                        <div class="tab-navigation-container" style="margin-bottom: 4rem;">
+                            <div class="tab-navigation d-flex justify-content-center flex-wrap" style="gap: 0.5rem; margin-bottom: 2rem;">
+                                <button class="tab-button active" data-tab="chat" style="background-color: #000000; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                                    💬 Chat
+                                </button>
+                                <button class="tab-button" data-tab="voice" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🎙️ Voice
+                                </button>
+                                <button class="tab-button" data-tab="personalization" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🎯 Personalization
+                                </button>
+                                <button class="tab-button" data-tab="agent-first" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🤖 Agent-first
+                                </button>
+                                <button class="tab-button" data-tab="engagement" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🎮 Engagement
+                                </button>
+                                <button class="tab-button" data-tab="sell-products" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 1rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                                    🏪 Sell Products
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tab Content -->
+                        <div class="tab-content-container">
+                            <!-- Chat Tab -->
+                            <div class="tab-content active" id="chat">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 text-left">
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Real-time secure chat</h2>
+                                        <div class="feature-list">
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">💬 Instantly help your customers chat</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🔍 Help your customers get instant product suggestions</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📱 Provides your customers with 24/7 shopping assistance</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{% static 'img/cart-shop.jpg' %}" class="img-fluid rounded" alt="Chat interface with shopping assistant" style="max-height: 400px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Voice Tab -->
+                            <div class="tab-content" id="voice" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 text-left">
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Voice Shopping Experience</h2>
+                                        <div class="feature-list">
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎙️ Your customers speak naturally to search and shop products they want</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🗣️ Your customers can experience hands-free shopping while multitasking</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{% static 'img/voice-chat-min.jpg' %}" class="img-fluid rounded" alt="Voice shopping interface" style="max-height: 400px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Personalization Tab -->
+                            <div class="tab-content" id="personalization" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 text-left">
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Deep Personalization </h2>
+                                        <div class="feature-list">
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎯 Custom product recommendations based on your customer's preferences and shopping style</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📊 Learning algorithm that improves with every customer interaction</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">⏰ Customers get timely notifications for recurring purchases</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{% static 'img/family-prep-meal-min.jpg' %}" class="img-fluid rounded" alt="Personalized shopping experience" style="max-height: 400px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Make Offers Tab -->
+                            <div class="tab-content" id="agent-first" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 text-left">
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Agent-first Commerce</h2>
+                                        <div class="feature-list">
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎭 Our agents provide multi-modal interactions through voice, images, text, and videos</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎯 Agents to help your customers effortlessly search, choose and make quality purchase decisions</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎤 Seamless voice and audio communication for natural conversations</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{% static 'img/happy-family.jpg' %}" class="img-fluid rounded" alt="Special offers and deals" style="max-height: 400px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Engagement Tab -->
+                            <div class="tab-content" id="engagement" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 text-left">
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Engaging Shopping Experience</h2>
+                                        <div class="feature-list">
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎮 Gamified shopping with rewards</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🛒 Smart carts and cart suggestions</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">💰 Personalized alerts on price drops with sales and back-in-stock notifications</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📱 Multi-channel re-engagement via sms, email and push notifications based on customer behavior</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{% static 'img/courier-with-delivery-cardboard-box-by-car.jpg' %}" class="img-fluid rounded" alt="Engaging shopping platform" style="max-height: 400px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sell Products Tab -->
+                            <div class="tab-content" id="sell-products" style="display: none;">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6 text-left">
+                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Sell Your Products</h2>
+                                        <div class="feature-list">
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🏪 Easy product listing with AI-powered descriptions</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">💰 Competitive commission rates and transparent pricing</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">📈 Analytics dashboard to track sales and performance</p>
+                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🛠️ Complete merchant support</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <img src="{% static 'img/grow-your-business.jpg' %}" class="img-fluid rounded" alt="Sell products platform" style="max-height: 400px; object-fit: cover;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                  
+                 </div>
+             </div>
+       </section>    

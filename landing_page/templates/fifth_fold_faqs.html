@@ -1,0 +1,48 @@
+{% load static %}
+       <!-- FAQ Section (Fifth Fold) -->
+       <section class="py-5" style="background-color: #1d1d1d !important;">
+           <div class="container-fluid px-7 mid-container">
+               <div class="row">
+                   <div class="col-lg-12 text-center mb-5">
+                       <h2 class="mission" style="color: #ffffff; font-size: 3rem; font-weight: 700; margin-bottom: 3rem;">Frequently Asked Questions</h2>
+                   </div>
+               </div>
+               <div class="row justify-content-center">
+                   <div class="col-lg-10 col-xl-8">
+                       <div class="faq-container">
+                           <!-- FAQ Item 1 - Transaction Fees -->
+                           <div class="faq-item" style="margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1.5rem;">
+                               <div class="faq-question" style="cursor: pointer; padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border-radius: 10px; margin-bottom: 1rem;" onclick="toggleFAQ('faq1')">
+                                   <h4 style="color: #ffffff; font-size: 1.3rem; font-weight: 600; margin: 0; display: flex; justify-content: space-between; align-items: center;">
+                                       What are the transaction fees for payments?
+                                       <span id="faq1-icon" style="font-size: 1.5rem; color: #ffffff;">+</span>
+                                   </h4>
+                               </div>
+                               <div id="faq1" class="faq-answer" style="display: none; padding: 0 1.5rem;">
+                                   <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem;">
+                                       Payment fees are handled by third-parties and are separate from our AI service pricing. So there is a small fee associated for this.
+                                   </p>
+                               </div>
+                           </div>
+
+                           <!-- FAQ Item 2 -->
+                           <div class="faq-item" style="margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1.5rem;">
+                               <div class="faq-question" style="cursor: pointer; padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border-radius: 10px; margin-bottom: 1rem;" onclick="toggleFAQ('faq2')">
+                                   <h4 style="color: #ffffff; font-size: 1.3rem; font-weight: 600; margin: 0; display: flex; justify-content: space-between; align-items: center;">
+                                       How do AI credits work?
+                                       <span id="faq2-icon" style="font-size: 1.5rem; color: #ffffff;">+</span>
+                                   </h4>
+                               </div>
+                               <div id="faq2" class="faq-answer" style="display: none; padding: 0 1.5rem;">
+                                   <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; line-height: 1.6; margin-bottom: 0;">
+                                       AI credits are used to power our intelligent agents and their interactions with your customers. Each conversation, product recommendation, and AI-powered action consumes credits based on complexity. Credits are included in your monthly plan and can be purchased additionally as needed.
+                                   </p>
+                               </div>
+                           </div>
+
+                       </div>
+                   </div>
+               </div>
+               <div id="business-signup" style="padding-top: 4rem;"></div>
+           </div>
+       </section>
