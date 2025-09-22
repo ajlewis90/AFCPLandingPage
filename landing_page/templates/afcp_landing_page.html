@@ -159,6 +159,9 @@
                     tabContents.forEach(content => {
                         content.classList.remove('active');
                         content.style.display = 'none';
+                        // Pause videos in hidden tabs
+                        const videos = content.querySelectorAll('video');
+                        videos.forEach(video => video.pause());
                     });
 
                     // Add active class to clicked button and corresponding content
