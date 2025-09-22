@@ -9,7 +9,7 @@ urlpatterns = [
 
     path('', landing_page_views.display_landing_page, name='landing_page'),
 
-    path('businesses/', landing_page_views.display_b2b_signup_page, name='b2b_signup_page'),
+    #path('businesses/', landing_page_views.display_b2b_signup_page, name='b2b_signup_page'),
 
     path('add-contact/', landing_page_views.add_contact, name='add_contact'),
 
