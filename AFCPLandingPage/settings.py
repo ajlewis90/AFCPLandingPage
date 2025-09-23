@@ -34,6 +34,7 @@ if 'PYTHONPATH' in os.environ:
     # Debug = False
     ALLOWED_HOSTS = ['.ap-southeast-2.elasticbeanstalk.com', '.afcp.com', '.afcp.com.', 'www.afcp.com', '.afcp.ai', '.afcp.ai.', 'www.afcp.ai']
 
+    '''
     SECURE_SSL_REDIRECT = True  # Force all HTTP traffic to HTTPS
     SESSION_COOKIE_SECURE = True  # Ensure session cookies are sent over HTTPS
     CSRF_COOKIE_SECURE = True  # Ensure CSRF cookies are sent over HTTPS
@@ -41,6 +42,7 @@ if 'PYTHONPATH' in os.environ:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
     SECURE_HSTS_PRELOAD = True  # Allow HSTS preloading
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")  # Enable proxy SSL support    
+    '''
 else:
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
