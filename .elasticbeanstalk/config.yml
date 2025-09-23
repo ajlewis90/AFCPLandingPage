@@ -1,0 +1,18 @@
+branch-defaults:
+  main:
+    environment: AFCPLandingPage-prod
+    group_suffix: null
+global:
+  application_name: AFCPLandingPage
+  branch: null
+  default_ec2_keyname: aws-eb-63
+  default_platform: Python 3.12 running on 64bit Amazon Linux 2023
+  default_region: ap-southeast-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli63
+  repository: null
+  sc: git
+  workspace_type: Application
