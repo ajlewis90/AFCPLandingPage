@@ -41,7 +41,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <video class="img-fluid rounded" aria-label="Chat interface with shopping assistant" style="width: 100%; max-height: 600px; object-fit: contain;" controls muted loop playsinline preload="metadata">
+                                        <video class="img-fluid rounded" aria-label="Chat interface with shopping assistant" style="width: 100%; max-height: 600px; object-fit: contain;" controls controlsList="nodownload" muted loop playsinline preload="metadata">
                                             <source src="{% static 'media/AFCP-chat-try-on-use-case-new.mp4' %}" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
@@ -50,21 +50,27 @@
                             </div>
                         </div>
 
-                            <!-- Voice Tab -->
-                            <div class="tab-content" id="voice" style="display: none;">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-6 text-left">
-                                        <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Voice Shopping Experience</h2>
-                                        <div class="feature-list">
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🎙️ Your customers speak naturally to search and shop products they want</p>
-                                            <p class="banner-text" style="margin-bottom: 1.5rem;">🗣️ Your customers can experience hands-free shopping while multitasking</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <img src="{% static 'img/voice-interface-realistic-min.png' %}" class="img-fluid rounded" alt="Voice shopping interface" style="max-height: 400px; object-fit: cover;" />
+                        <!-- Voice Tab -->
+                        <div class="tab-content" id="voice" style="display: none;">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 text-left">
+                                    <h2 class="mission" style="color: #ffffff; margin-bottom: 2rem;">Voice Shopping Experience</h2>
+                                    <div class="feature-list">
+                                        <p class="banner-text" style="margin-bottom: 1.5rem;">🎙️ Your customers speak naturally to search and shop products they want</p>
+                                        <p class="banner-text" style="margin-bottom: 1.5rem;">🗣️ Your customers can experience hands-free shopping while multitasking</p>
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <!--
+                                    <img src="{% static 'img/voice-interface-realistic-min.png' %}" class="img-fluid rounded" alt="Voice shopping interface" style="max-height: 400px; object-fit: cover;" />
+                                    -->
+                                    <video class="img-fluid rounded" aria-label="Voice chat interface" style="width: 100%; max-height: 600px; object-fit: contain;" controls controlsList="nodownload" loop playsinline preload="metadata">
+                                        <source src="{% static 'media/Voice-chat-use-case.mp4' %}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>                                       
+                                </div>
                             </div>
+                        </div>
 
                             <!-- Personalization Tab -->
                             <div class="tab-content" id="personalization" style="display: none;">
@@ -113,7 +119,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <video class="img-fluid rounded" aria-label="Engaging shopping platform" style="width: 100%; max-height: 600px; object-fit: contain;" controls muted loop playsinline preload="metadata">
+                                        <video class="img-fluid rounded" aria-label="Engaging shopping platform" style="width: 100%; max-height: 600px; object-fit: contain;" controls controlsList="nodownload" muted loop playsinline preload="metadata">
                                             <source src="{% static 'media/AFCP-price-drop-notification.mp4' %}" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
