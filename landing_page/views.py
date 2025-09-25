@@ -85,7 +85,8 @@ def add_business_contact(request):
                 contact_person_name = request.POST.get('contact_person_name', '')
                 contact_number = str(request.POST.get('contact_number', ''))
                 job_title = request.POST.get('job_title', '')
-                company_website = request.POST.get('company_website', '')             
+                company_website = request.POST.get('company_website', '')
+                email_updates = request.POST.get('email_updates', '') == '1'  # Convert to boolean
 
                 print("Business name:")
                 print(business_name)
@@ -107,9 +108,10 @@ def add_business_contact(request):
                         "contactNumber": contact_number,
                         "jobTitle": job_title,
                         "companyWebsite": company_website,
+                        "emailUpdates": email_updates,
 
                         "mailingLists": {
-                                "cmbzy0u0m36gm0jy786l702kf": True
+                                "cmbzy0u0m36gm0jy786l702kf": email_updates  # Only add to mailing list if they opted in
                         }                       
                         #"custom_attributes": {}
                 }
