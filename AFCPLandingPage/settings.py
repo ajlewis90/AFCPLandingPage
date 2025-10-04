@@ -21,30 +21,59 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p^nijz6ai(5**#82!u*-qpeo760ku9(=pbb-f1scz4(r7j#l7^'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-p^nijz6ai(5**#82!u*-qpeo760ku9(=pbb-f1scz4(r7j#l7^')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-if 'PYTHONPATH' in os.environ:
-    Debug = False
-    # Debug = False
+# Check environment and configure accordingly
+if 'VERCEL' in os.environ:
+    # Vercel production deployment
+    DEBUG = False
+    ALLOWED_HOSTS = [
+        '.vercel.app',
+        '.afcp.com',
+        '.afcp.com.',
+        'www.afcp.com',
+        '.afcp.ai',
+        '.afcp.ai.',
+        'www.afcp.ai',
+        'afcp.ai'
+    ]
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 315360000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    CSRF_TRUSTED_ORIGINS = [
+        'https://*.vercel.app',
+        'https://afcp.com',
+        'https://www.afcp.com',
+        'https://afcp.ai',
+        'https://www.afcp.ai'
+    ]
+elif 'REPLIT_DEPLOYMENT' in os.environ or ('PYTHONPATH' in os.environ and 'REPL_ID' not in os.environ):
+    # AWS Elastic Beanstalk or other production
+    DEBUG = False
     ALLOWED_HOSTS = ['.ap-southeast-2.elasticbeanstalk.com', '.afcp.com', '.afcp.com.', 'www.afcp.com', '.afcp.ai', '.afcp.ai.', 'www.afcp.ai']
-
-    SECURE_SSL_REDIRECT = True  # Force all HTTP traffic to HTTPS
-    SESSION_COOKIE_SECURE = True  # Ensure session cookies are sent over HTTPS
-    CSRF_COOKIE_SECURE = True  # Ensure CSRF cookies are sent over HTTPS
-    SECURE_HSTS_SECONDS = 315360000  # Enforce HSTS for 10 years
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
-    SECURE_HSTS_PRELOAD = True  # Allow HSTS preloading
-    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")  # Enable proxy SSL support
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 315360000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 else:
-    # SECURITY WARNING: don't run with debug turned on in production!
+    # Development mode (Replit or local)
     DEBUG = True
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['*']
+
+
+# Application definition
 
 
 # Application definition
@@ -65,6 +94,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -96,7 +126,18 @@ WSGI_APPLICATION = 'AFCPLandingPage.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-if 'RDS_DB_NAME' in os.environ:
+if 'DATABASE_URL' in os.environ:
+    # Supabase PostgreSQL (Vercel deployment)
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
+elif 'RDS_DB_NAME' in os.environ:
+    # AWS RDS PostgreSQL (AWS Elastic Beanstalk)
     DATABASES = {
             'default': {
                 'ENGINE':'django.db.backends.postgresql_psycopg2',
@@ -108,6 +149,7 @@ if 'RDS_DB_NAME' in os.environ:
             }
         }
 else:
+    # Local development SQLite
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -140,7 +182,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Pacific/Auckland'
 
 USE_I18N = True
 
@@ -182,9 +224,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+# WhiteNoise configuration for Vercel static file serving
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # MEDIA_URL = '/images/'
 
 # MEDIA_ROOT =  os.path.join(BASE_DIR, 'static/images')
+
 
 
 
