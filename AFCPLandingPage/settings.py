@@ -31,7 +31,8 @@ ALLOWED_HOSTS = ['*']
 # Check environment and configure accordingly
 if 'VERCEL' in os.environ:
     # Vercel production deployment
-    DEBUG = False
+    #DEBUG = False
+    DEBUG = os.environ.get('DEBUG', 'False') == 'True'
     ALLOWED_HOSTS = [
         '.vercel.app',
         '.afcp.com',
