@@ -57,6 +57,7 @@ if 'VERCEL' in os.environ:
         'https://afcp.ai',
         'https://www.afcp.ai'
     ]
+    ADMIN_URL = os.environ['ADMIN_URL']
 elif 'REPLIT_DEPLOYMENT' in os.environ or ('PYTHONPATH' in os.environ and 'REPL_ID' not in os.environ):
     # AWS Elastic Beanstalk or other production
     DEBUG = False
@@ -68,10 +69,12 @@ elif 'REPLIT_DEPLOYMENT' in os.environ or ('PYTHONPATH' in os.environ and 'REPL_
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    ADMIN_URL = 'admin/'
 else:
     # Development mode (Replit or local)
     DEBUG = True
     ALLOWED_HOSTS = ['*']
+    ADMIN_URL = 'admin/'
 
 
 # Application definition
