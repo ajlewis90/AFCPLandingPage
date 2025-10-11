@@ -229,7 +229,7 @@ STATICFILES_DIRS = [
 ]
 
 # WhiteNoise configuration for Vercel static file serving
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # MEDIA_URL = '/images/'
 
