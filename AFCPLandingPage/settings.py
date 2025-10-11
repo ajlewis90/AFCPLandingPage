@@ -221,15 +221,14 @@ if 'S3_BUCKET' in os.environ:
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)    
 
 else:
+    # WhiteNoise configuration for non-S3 deployments (Vercel, etc.)
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, "www", "static")
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
-# WhiteNoise configuration for Vercel static file serving
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # MEDIA_URL = '/images/'
 
