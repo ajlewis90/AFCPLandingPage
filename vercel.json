@@ -1,18 +1,26 @@
 {
   "builds": [
     {
-      "src": "AFCPLandingPage/wsgi.py",
+      "src": "myproject/wsgi.py",
       "use": "@vercel/python",
       "config": { 
         "maxLambdaSize": "15mb",
         "runtime": "python3.9"
       }
+    },
+    {
+      "src": "www/static/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
+      "src": "/static/(.*)",
+      "dest": "/www/static/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "AFCPLandingPage/wsgi.py"
+      "dest": "myproject/wsgi.py"
     }
   ]
 }
