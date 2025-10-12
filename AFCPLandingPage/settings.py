@@ -21,17 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-p^nijz6ai(5**#82!u*-qpeo760ku9(=pbb-f1scz4(r7j#l7^')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-
-if not SECRET_KEY:
-    if DEBUG:
-        SECRET_KEY = 'django-insecure-dev-key-only'
-    else:
-        raise ValueError("SECRET_KEY environment variable must be set in production")
-
-
 
 ALLOWED_HOSTS = ['*']
 
@@ -64,6 +57,7 @@ if 'VERCEL' in os.environ:
         'https://www.afcp.ai'
     ]
     ADMIN_URL = os.environ.get('ADMIN_URL', 'admin/')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 elif 'REPLIT_DEPLOYMENT' in os.environ:
     # Replit production deployment
     DEBUG = False
@@ -255,10 +249,6 @@ if 'S3_BUCKET' in os.environ:
     AWS_S3_FILE_OVERWRITE = False
     AWS_LOCATION = 'static'
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-else:
-    # Vercel, local, and other deployments - use WhiteNoise when not in DEBUG
-    if not DEBUG:
-        STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 # MEDIA_URL = '/images/'
 
 # MEDIA_ROOT =  os.path.join(BASE_DIR, 'static/images')
