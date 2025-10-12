@@ -197,38 +197,46 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 # Static files (CSS, JavaScript, Images)
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
+
+# Base static files directory
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+# Environment-specific static file configuration
 if 'S3_BUCKET' in os.environ:
+    # AWS S3 Storage (AWS Elastic Beanstalk or AWS deployment)
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     
     AWS_S3_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     AWS_S3_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-
     AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET']
-    #AWS_S3_REGION_NAME = os.environ['AWS_S3_REGION_NAME']
-
+    
     AWS_DEFAULT_ACL = None
-
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
     AWS_S3_OBJECT_PARAMETERS = {
-       'CacheControl': 'max-age=86400',
+        'CacheControl': 'max-age=86400',
     }
     AWS_S3_FILE_OVERWRITE = False
-    #AWS_DEFAULT_ACL = 'public-read'
-    AWS_DEFAULT_ACL = None
-
+    
     AWS_LOCATION = 'static'
-    STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)    
-
-else:
-    # WhiteNoise configuration for non-S3 deployments (Vercel, etc.)
+    STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+elif 'VERCEL' in os.environ:
+    # Vercel deployment - use WhiteNoise
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, "www", "static")
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+else:
+    # Local development - simple static file serving
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, "www", "static")
+    # When DEBUG=True, Django serves static files automatically
+    # When DEBUG=False locally, WhiteNoise will handle it
+    if not DEBUG:
+        STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # MEDIA_URL = '/images/'
 
