@@ -1,13 +1,17 @@
-*.pyc
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
+*.pyc
+
+# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+!.elasticbeanstalk/*.cfg.yml
+
 !.elasticbeanstalk/*.global.yml
 .project
+staticfiles/
 *.pyc
 *.pydevproject
 *.settings
-www/static/*
 .idea/*
 venv/*
 venv37/*
