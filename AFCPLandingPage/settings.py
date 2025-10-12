@@ -96,6 +96,7 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -111,6 +112,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -209,14 +211,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# Always define STATIC_ROOT for collectstatic
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Source directories for static files (not collected)
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+# For Vercel, we don't use STATICFILES_DIRS since we're serving through WhiteNoise
+if 'VERCEL' not in os.environ:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
+
+# WhiteNoise configuration for Vercel
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Environment-specific static file configuration
 if 'S3_BUCKET' in os.environ:
