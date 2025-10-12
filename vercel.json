@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "bash build.sh",
+  "buildCommand": "python manage.py collectstatic --noinput --clear",
   "builds": [
     {
       "src": "AFCPLandingPage/wsgi.py",
@@ -12,10 +12,6 @@
     }
   ],
   "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
     {
       "src": "/(.*)",
       "dest": "AFCPLandingPage/wsgi.py"
