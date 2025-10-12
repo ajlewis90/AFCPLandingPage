@@ -8,10 +8,11 @@
 
 !.elasticbeanstalk/*.global.yml
 .project
-staticfiles/
 *.pyc
 *.pydevproject
 *.settings
+www/static/*
+staticfiles/
 .idea/*
 venv/*
 venv37/*

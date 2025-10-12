@@ -204,7 +204,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
+
 STATIC_URL = '/static/'
+
+# Always define STATIC_ROOT for collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Source directories for static files (not collected)
 STATICFILES_DIRS = [
@@ -226,10 +232,8 @@ if 'S3_BUCKET' in os.environ:
     AWS_S3_FILE_OVERWRITE = False
     AWS_LOCATION = 'static'
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-    
 else:
-    # Vercel, local, and other deployments - use WhiteNoise
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Vercel, local, and other deployments - use WhiteNoise when not in DEBUG
     if not DEBUG:
         STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 # MEDIA_URL = '/images/'
