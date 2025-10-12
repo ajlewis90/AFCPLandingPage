@@ -21,7 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-p^nijz6ai(5**#82!u*-qpeo760ku9(=pbb-f1scz4(r7j#l7^')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = 'django-insecure-dev-key-only'
+    else:
+        raise ValueError("SECRET_KEY environment variable must be set in production")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
@@ -31,7 +36,6 @@ ALLOWED_HOSTS = ['*']
 # Check environment and configure accordingly
 if 'VERCEL' in os.environ:
     # Vercel production deployment
-    #DEBUG = False
     DEBUG = os.environ.get('DEBUG', 'False') == 'True'
     ALLOWED_HOSTS = [
         '.vercel.app',
@@ -57,11 +61,11 @@ if 'VERCEL' in os.environ:
         'https://afcp.ai',
         'https://www.afcp.ai'
     ]
-    ADMIN_URL = os.environ['ADMIN_URL']
-elif 'REPLIT_DEPLOYMENT' in os.environ or ('PYTHONPATH' in os.environ and 'REPL_ID' not in os.environ):
-    # AWS Elastic Beanstalk or other production
+    ADMIN_URL = os.environ.get('ADMIN_URL', 'admin/')
+elif 'REPLIT_DEPLOYMENT' in os.environ:
+    # Replit production deployment
     DEBUG = False
-    ALLOWED_HOSTS = ['.ap-southeast-2.elasticbeanstalk.com', '.afcp.com', '.afcp.com.', 'www.afcp.com', '.afcp.ai', '.afcp.ai.', 'www.afcp.ai']
+    ALLOWED_HOSTS = ['.replit.dev', '.repl.co', '.afcp.com', '.afcp.com.', 'www.afcp.com', '.afcp.ai', '.afcp.ai.', 'www.afcp.ai']
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -69,9 +73,26 @@ elif 'REPLIT_DEPLOYMENT' in os.environ or ('PYTHONPATH' in os.environ and 'REPL_
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    CSRF_TRUSTED_ORIGINS = [
+        'https://*.replit.dev',
+        'https://*.repl.co',
+        'https://afcp.com',
+        'https://www.afcp.com',
+        'https://afcp.ai',
+        'https://www.afcp.ai'
+    ]
+    ADMIN_URL = 'admin/'
+elif 'REPL_ID' in os.environ:
+    # Replit development mode
+    DEBUG = True
+    ALLOWED_HOSTS = ['*']
+    CSRF_TRUSTED_ORIGINS = [
+        'https://*.replit.dev',
+        'https://*.repl.co'
+    ]
     ADMIN_URL = 'admin/'
 else:
-    # Development mode (Replit or local)
+    # Local development
     DEBUG = True
     ALLOWED_HOSTS = ['*']
     ADMIN_URL = 'admin/'
@@ -249,10 +270,7 @@ else:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Loops integration settings
-if 'LOOPS_PROD_API_KEY' in os.environ:
-    LOOP_API_KEY = os.environ['LOOPS_PROD_API_KEY']
-else:
-    LOOP_API_KEY = '8e323658af660be3b2858b69237ce0d9' 
+LOOP_API_KEY = os.environ.get('LOOPS_PROD_API_KEY', '') 
 
 LOOPS_SMTP_HOST = 'smtp.loops.so'
 LOOPS_SMTP_PORT = '587'
