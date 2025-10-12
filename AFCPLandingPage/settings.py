@@ -57,7 +57,6 @@ if 'VERCEL' in os.environ:
         'https://www.afcp.ai'
     ]
     ADMIN_URL = os.environ.get('ADMIN_URL', 'admin/')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 elif 'REPLIT_DEPLOYMENT' in os.environ:
     # Replit production deployment
     DEBUG = False
@@ -96,11 +95,7 @@ else:
 
 # Application definition
 
-
-# Application definition
-
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -116,7 +111,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -214,17 +208,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-# Static files (CSS, JavaScript, Images)
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-# Base static files directory
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = '/static/'
 
 # Always define STATIC_ROOT for collectstatic
@@ -250,11 +233,6 @@ if 'S3_BUCKET' in os.environ:
     AWS_S3_FILE_OVERWRITE = False
     AWS_LOCATION = 'static'
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-# MEDIA_URL = '/images/'
-
-# MEDIA_ROOT =  os.path.join(BASE_DIR, 'static/images')
-
-
 
 
 # Default primary key field type
