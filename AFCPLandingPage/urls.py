@@ -24,6 +24,3 @@ urlpatterns = [
 
     path('', include('landing_page.urls')),
 ]
-
-if not settings.DEBUG or settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

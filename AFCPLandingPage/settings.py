@@ -57,7 +57,6 @@ if 'VERCEL' in os.environ:
         'https://www.afcp.ai'
     ]
     ADMIN_URL = os.environ.get('ADMIN_URL', 'admin/')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 elif 'REPLIT_DEPLOYMENT' in os.environ:
     # Replit production deployment
     DEBUG = False
@@ -92,9 +91,6 @@ else:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
     ADMIN_URL = 'admin/'
-
-
-# Application definition
 
 
 # Application definition
@@ -214,28 +210,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-# Static files (CSS, JavaScript, Images)
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-# Base static files directory
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = '/static/'
-
-# Always define STATIC_ROOT for collectstatic
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Source directories for static files (not collected)
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# Environment-specific static file configuration
+# WhiteNoise configuration - use simple storage, not manifest
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_AUTOREFRESH = True if DEBUG else False
+
+# Use basic WhiteNoise storage (no manifest)
 if 'S3_BUCKET' in os.environ:
     # AWS S3 Storage
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -250,11 +236,9 @@ if 'S3_BUCKET' in os.environ:
     AWS_S3_FILE_OVERWRITE = False
     AWS_LOCATION = 'static'
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-# MEDIA_URL = '/images/'
-
-# MEDIA_ROOT =  os.path.join(BASE_DIR, 'static/images')
-
-
+else:
+    # Use WhiteNoise with compression but no manifest (simpler)
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
 # Default primary key field type
