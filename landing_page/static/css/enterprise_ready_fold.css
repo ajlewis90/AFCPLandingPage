@@ -1,0 +1,311 @@
+/* ══════════════════════════════════════════════════════════
+   Enterprise Ready Section Styles
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Top Grid: featured large + 2 medium ────────────────── */
+.er-grid-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+/* ── Bottom Grid: full-width card ────────────────────────── */
+.er-grid-bottom {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+/* ── Individual Card ─────────────────────────────────────── */
+.er-card {
+    background: rgba(255,255,255,0.03);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.er-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,0.2);
+}
+
+/* Wide card (Connection card) */
+.er-card--wide {
+    flex-direction: row;
+}
+
+/* Featured card styling (Reliability) */
+.er-card--featured {
+    border: 1px solid rgba(59,130,246,0.25);
+}
+
+/* ── Visual Area ─────────────────────────────────────────── */
+.er-visual {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+}
+.er-visual-inner {
+    width: 100%;
+    max-width: 340px;
+}
+
+/* Wide visual for Connection card */
+.er-visual--wide {
+    width: 50%;
+    min-height: 220px;
+}
+.er-visual-inner--wide {
+    max-width: 100%;
+}
+
+/* ── Text Area ───────────────────────────────────────────── */
+.er-text {
+    padding: 1.6rem 1.6rem 1.8rem;
+    flex: 1;
+}
+.er-card-title {
+    color: #ffffff;
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+}
+.er-card-desc {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* ── Reliability Visual ──────────────────────────────────── */
+.rel-screen {
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 1.4rem 1.3rem;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+.rel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+}
+.rel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.rel-dot.green {
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34,197,94,0.6);
+}
+.rel-label {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.8rem;
+    flex: 1;
+}
+.rel-status-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.65rem;
+    border-radius: 12px;
+    background: rgba(34,197,94,0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34,197,94,0.3);
+}
+.rel-bars { display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.1rem; }
+.rel-bar-row { display: flex; align-items: center; gap: 0.5rem; }
+.rel-bar-label { color: rgba(255,255,255,0.6); font-size: 0.75rem; width: 85px; flex-shrink: 0; }
+.rel-bar-track {
+    flex: 1;
+    height: 7px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    overflow: hidden;
+}
+.rel-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #93c5fd);
+    border-radius: 20px;
+}
+.rel-bar-fill.anim-pulse { animation: pulse-bar 2.5s ease-in-out infinite alternate; }
+@keyframes pulse-bar { from { opacity: 0.7; } to { opacity: 1; } }
+.rel-bar-pct { color: #93c5fd; font-size: 0.75rem; font-weight: 600; width: 38px; text-align: right; flex-shrink: 0; }
+.rel-footer { text-align: center; }
+.rel-uptime-badge {
+    display: inline-block;
+    background: rgba(59,130,246,0.18);
+    color: #93c5fd;
+    border: 1px solid rgba(59,130,246,0.35);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 1rem;
+}
+
+/* ── Security Visual ─────────────────────────────────────── */
+.sec-screen {
+    background: rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 1.3rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    text-align: center;
+}
+.sec-lock { font-size: 2.2rem; margin-bottom: 0.9rem; }
+.sec-items { text-align: left; display: flex; flex-direction: column; gap: 0.55rem; }
+.sec-item {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: rgba(255,255,255,0.82);
+    font-size: 0.82rem;
+    background: rgba(255,255,255,0.05);
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+}
+.sec-check { font-size: 0.85rem; flex-shrink: 0; }
+.sec-item.anim-item { animation: slide-in-item 1.8s ease-in-out infinite alternate; }
+@keyframes slide-in-item { from { background: rgba(255,255,255,0.05); } to { background: rgba(59,130,246,0.12); } }
+
+/* ── Safety Visual ───────────────────────────────────────── */
+.saf-screen {
+    background: rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 1.3rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    text-align: center;
+}
+.saf-shield { font-size: 2.2rem; margin-bottom: 0.9rem; }
+.saf-checks { display: flex; flex-direction: column; gap: 0.55rem; }
+.saf-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.05);
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+}
+.saf-label { color: rgba(255,255,255,0.82); font-size: 0.8rem; }
+.saf-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    background: rgba(34,197,94,0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34,197,94,0.3);
+}
+.saf-badge.anim-blink { animation: blink-badge 2s ease-in-out infinite; }
+@keyframes blink-badge {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ── Connection Visual ───────────────────────────────────── */
+.conn-screen {
+    padding: 1rem 0;
+}
+.conn-nodes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    position: relative;
+}
+.conn-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 12px;
+    padding: 0.7rem 0.9rem;
+    font-size: 1.4rem;
+    min-width: 80px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+.conn-node-label {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.node-center {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    border-color: #60a5fa;
+    box-shadow: 0 0 20px rgba(59,130,246,0.4);
+    transform: scale(1.1);
+}
+.conn-line {
+    height: 2px;
+    width: 28px;
+    background: linear-gradient(90deg, rgba(99,102,241,0.6), rgba(139,92,246,0.6));
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+}
+.conn-line::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: #818cf8;
+    border-radius: 50%;
+    animation: travel-dot 2s linear infinite;
+}
+@keyframes travel-dot {
+    from { left: 0; opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    to { left: calc(100% - 8px); opacity: 0; }
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 1100px) {
+    .er-grid-top {
+        grid-template-columns: 1fr 1fr;
+    }
+    .er-card--featured {
+        grid-column: span 2;
+    }
+    .er-visual--wide {
+        width: 50%;
+    }
+}
+
+@media (max-width: 767px) {
+    .er-grid-top {
+        grid-template-columns: 1fr;
+    }
+    .er-card--featured {
+        grid-column: span 1;
+    }
+    .er-card--wide {
+        flex-direction: column;
+    }
+    .er-visual--wide {
+        width: 100%;
+        min-height: 200px;
+    }
+    .conn-nodes {
+        gap: 0.3rem;
+        flex-wrap: wrap;
+    }
+    .conn-line {
+        display: none;
+    }
+}

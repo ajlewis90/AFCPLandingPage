@@ -1,0 +1,54 @@
+/* ══════════════════════════════════════════════════════════
+   Business Sign-Up Section Styles
+   ══════════════════════════════════════════════════════════ */
+
+/* Enhanced input focus states */
+.masthead .subscribe-controls:focus {
+    outline: none;
+    border-color: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3) !important;
+    background-color: #ffffff !important;
+}
+
+/* Enhanced button hover state */
+.masthead .btn-sign-up-daxedax:hover {
+    background: #f0f0f0 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Checkbox styling */
+.masthead #id_email_updates {
+    accent-color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .masthead h3 {
+        font-size: 1.8rem !important;
+    }
+    
+    .masthead .form-content > div > div {
+        padding: 0 10px;
+    }
+    
+    .masthead .subscribe-controls {
+        font-size: 14px !important;
+        padding: 12px 16px !important;
+    }
+    
+    .masthead .btn-sign-up-daxedax {
+        font-size: 1rem !important;
+        padding: 14px 24px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .masthead h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    .masthead > div > div:first-child {
+        padding: 2rem 1.5rem !important;
+    }
+}
