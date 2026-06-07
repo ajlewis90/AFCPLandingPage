@@ -5,32 +5,292 @@
     <title>AFCP AI | Our Thesis</title>
     {% include 'landing_page_head.html' %}
 
-    <style>
-        /* ── Thesis page typography & layout ── */
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+    <!-- ════════════════════════════════════════════════════════════
+         THESIS PAGE STRUCTURED DATA (JSON-LD)
+         Optimised for GEO / Agent discovery.
+         Primary topics: Efficient AI, Experiential AI, Agentic Internet.
+         ════════════════════════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
 
-        :root {
-            --bg: #1d1d1d;
-            --surface: #242424;
-            --border: rgba(255,255,255,0.08);
-            --text-primary: #f5f5f0;
-            --text-secondary: rgba(245,245,240,0.6);
-            --accent: #e09900;
-            --accent-soft: rgba(224,153,0,0.12);
+        {
+          "@type": "Article",
+          "@id": "https://afcp.ai/our-thesis/#article",
+          "headline": "Shopper Agents that make life easier for everyone — The AFCP AI Thesis",
+          "description": "AFCP AI's founding thesis on Efficient AI, Experiential AI, and the Agentic Internet. Covers why LLM-first architectures cannot scale, how an agent-first approach reduces compute and energy by 10x, and how Experiential AI builds human-first, self-learning shopper agents for commerce.",
+          "datePublished": "2025-01-01",
+          "dateModified": "2025-06-01",
+          "author": {
+            "@type": "Organization",
+            "@id": "https://afcp.ai/#organization",
+            "name": "AFCP AI"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "@id": "https://afcp.ai/#organization",
+            "name": "AFCP AI"
+          },
+          "url": "https://afcp.ai/our-thesis/",
+          "isPartOf": {
+            "@type": "WebSite",
+            "url": "https://afcp.ai"
+          },
+          "about": [
+            { "@type": "Thing", "name": "Efficient AI", "description": "AI that is like electricity — scalable, affordable and reliable — consuming fewer chips, compute and energy than LLM-first approaches." },
+            { "@type": "Thing", "name": "Experiential AI", "description": "A new AI paradigm focused on building human-first, collaborative and self-learning agents. Contrasted with Generative AI, Experiential AI agents learn continuously from real-world experience and human intervention." },
+            { "@type": "Thing", "name": "Agentic Commerce", "description": "The next evolution of ecommerce where AI shopper agents handle product discovery, personalisation, checkout and retail operations autonomously on behalf of consumers and businesses." },
+            { "@type": "Thing", "name": "Agentic Internet", "description": "A reimagined internet where consumers and businesses interact directly with agents via voice, text or video, built on the existing Web1/Web2/Web3 backbone with an agentic layer on top." }
+          ],
+          "keywords": [
+            "Efficient AI", "Experiential AI", "Agentic Commerce", "Agentic Internet",
+            "shopper agent", "LLM-first paradigm", "agent-first approach",
+            "hybrid AI architecture", "compute efficiency", "self-learning agents",
+            "AFCP AI thesis", "DC vs AC AI analogy", "artificial shopper mind", "ecommerce AI agents"
+          ],
+          "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".thesis-title", ".thesis-tagline", ".pull-quote p", ".section-heading"]
+          }
+        },
+
+        {
+          "@type": "WebPage",
+          "@id": "https://afcp.ai/our-thesis/#webpage",
+          "url": "https://afcp.ai/our-thesis/",
+          "name": "AFCP AI | Our Thesis — Efficient AI, Experiential AI and the Agentic Internet",
+          "description": "AFCP AI's founding thesis on building efficient, experiential AI for agentic commerce. Covers the Agentic Internet, Efficient AI architecture, and Experiential AI as the successor to Generative AI.",
+          "isPartOf": { "@id": "https://afcp.ai/#organization" },
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://afcp.ai" },
+              { "@type": "ListItem", "position": 2, "name": "Our Thesis", "item": "https://afcp.ai/our-thesis/" }
+            ]
+          }
+        },
+
+        {
+          "@type": "FAQPage",
+          "@id": "https://afcp.ai/our-thesis/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Efficient AI?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Efficient AI is AI that is like electricity — scalable, affordable and reliable. It must consume fewer chips, compute and energy than today's LLM-first approaches. AFCP AI believes a new hybrid AI architecture is needed for efficiently carrying out thinking, planning, reasoning and acting, rather than relying solely on large language models whose compute and energy costs make them unsuitable for efficient scaling in the long run."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is Experiential AI?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Experiential AI is a new approach to building AI that is human-first, collaborative and self-learning. Unlike Generative AI, which relies on large pre-trained models, Experiential AI builds agents that learn continuously from real-world experiences and human intervention, making them self-adaptive over time. AFCP AI uses Experiential AI to build shopper agents that are not only active helpers for consumers but also interactive and fun to be with."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why is an LLM-first approach unsuitable for agentic commerce?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Compute and energy costs are rising, making LLMs unsuitable for efficient scaling in the long run. Models cannot scale with the real world — they lack continual learning and memory. Generative AI uses a lot of training and inference compute that is not necessary. AFCP AI aims to consume 10x less infrastructure, compute and energy compared with model-first approaches, by implementing better strategies to build AI agents that can scale efficiently."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the DC vs AC analogy for AI?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AFCP AI draws an analogy between the DC distribution crisis of electricity and today's LLM-first AI paradigm. AI built on an LLM-first approach is analogous to DC electricity — it works but cannot scale to meet the growing needs of businesses, the environment and consumers. The solution is AC: an efficient agent-first approach, just as AC electricity replaced DC for large-scale distribution. Efficient AI can help deploy AC-like agents for the world."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the Agentic Internet?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Agentic Internet is a reimagined version of the current internet where consumers and businesses interact directly with agents through voice, text or video. It uses the existing Web1, Web2 and Web3 infrastructure as the backbone but adds an agentic layer for the experiencing part. Building the Agentic Internet requires solving five foundational challenges: accessibility of agents, identity of agents, security and privacy of agents, control back to consumers, and trustworthiness of agents."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is an artificial shopper's mind?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "An artificial shopper's mind is AFCP AI's approach to building AI that understands and anticipates shopper behaviour with precision. Rather than relying on large models alone, it is an artificial mind specific to cracking shopping intelligence — one that plans, remembers, and pursues goals for a shopper based on real-world experiences. It enables instant hyper-personalised searches and suggestions, agentic buying and guiding for instant or repeat purchases, and automation of shopping tasks like research."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does Experiential AI differ from Generative AI?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Generative AI was the last revolution. Experiential AI is the new approach needed for the Agentic future. While Generative AI relies on large pre-trained models and high inference compute, Experiential AI builds agents that are human-first, collaborative and self-learning. The architecture can be hybrid and use components of Generative AI, but without being restricted to it. Experiential AI agents learn by experience continually, consume less energy and compute, can be governed, and are safe, reliable, and self-adaptive."
+              }
+            }
+          ]
         }
 
+      ]
+    }
+    </script>
+
+    <style>
+            "@id": "https://afcp.ai/#organization",
+            "name": "AFCP AI"
+          },
+          "url": "https://afcp.ai/our-thesis/",
+          "isPartOf": {
+            "@type": "WebSite",
+            "url": "https://afcp.ai"
+          },
+          "about": [
+            { "@type": "Thing", "name": "Efficient AI", "description": "AI that is like electricity — scalable, affordable and reliable — consuming fewer chips, compute and energy than LLM-first approaches." },
+            { "@type": "Thing", "name": "Experiential AI", "description": "A new AI paradigm focused on building human-first, collaborative and self-learning agents. Contrasted with Generative AI, Experiential AI agents learn continuously from real-world experience and human intervention." },
+            { "@type": "Thing", "name": "Agentic Commerce", "description": "The next evolution of ecommerce where AI shopper agents handle product discovery, personalisation, checkout and retail operations autonomously on behalf of consumers and businesses." },
+            { "@type": "Thing", "name": "Agentic Internet", "description": "A reimagined internet where consumers and businesses interact directly with agents via voice, text or video, built on the existing Web1/Web2/Web3 backbone with an agentic layer on top." }
+          ],
+          "keywords": [
+            "Efficient AI",
+            "Experiential AI",
+            "Agentic Commerce",
+            "Agentic Internet",
+            "shopper agent",
+            "LLM-first paradigm",
+            "agent-first approach",
+            "hybrid AI architecture",
+            "compute efficiency",
+            "self-learning agents",
+            "AFCP AI thesis",
+            "DC vs AC AI analogy",
+            "artificial shopper mind",
+            "ecommerce AI agents"
+          ],
+          "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".thesis-title", ".thesis-tagline", ".pull-quote p", ".section-heading"]
+          }
+        },
+
+        {
+          "@type": "WebPage",
+          "@id": "https://afcp.ai/our-thesis/#webpage",
+          "url": "https://afcp.ai/our-thesis/",
+          "name": "AFCP AI | Our Thesis — Efficient AI, Experiential AI &amp; the Agentic Internet",
+          "description": "AFCP AI's founding thesis on building efficient, experiential AI for agentic commerce. Covers the Agentic Internet, Efficient AI architecture, and Experiential AI as the successor to Generative AI.",
+          "isPartOf": { "@id": "https://afcp.ai/#organization" },
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://afcp.ai" },
+              { "@type": "ListItem", "position": 2, "name": "Our Thesis", "item": "https://afcp.ai/our-thesis/" }
+            ]
+          }
+        },
+
+        {
+          "@type": "FAQPage",
+          "@id": "https://afcp.ai/our-thesis/#faq",
+          "mainEntity": [
+
+            {
+              "@type": "Question",
+              "name": "What is Efficient AI?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Efficient AI is AI that is like electricity — scalable, affordable and reliable. It must consume fewer chips, compute and energy than today's LLM-first approaches. AFCP AI believes a new hybrid AI architecture is needed for efficiently carrying out thinking, planning, reasoning and acting, rather than relying solely on large language models whose compute and energy costs make them unsuitable for efficient scaling in the long run."
+              }
+            },
+
+            {
+              "@type": "Question",
+              "name": "What is Experiential AI?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Experiential AI is a new approach to building AI that is human-first, collaborative and self-learning. Unlike Generative AI, which relies on large pre-trained models, Experiential AI builds agents that learn continuously from real-world experiences and human intervention, making them self-adaptive over time. AFCP AI uses Experiential AI to build shopper agents that are not only active helpers for consumers but also interactive and fun to be with."
+              }
+            },
+
+            {
+              "@type": "Question",
+              "name": "Why is an LLM-first approach unsuitable for agentic commerce?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Compute and energy costs are rising, making LLMs unsuitable for efficient scaling in the long run. Models cannot scale with the real world — they lack continual learning and memory. Generative AI uses a lot of training and inference compute that is not necessary. AFCP AI aims to consume 10x less infrastructure, compute and energy compared with model-first approaches, by implementing better strategies to build AI agents that can scale efficiently."
+              }
+            },
+
+            {
+              "@type": "Question",
+              "name": "What is the DC vs AC analogy for AI?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AFCP AI draws an analogy between the DC distribution crisis of electricity and today's LLM-first AI paradigm. AI built on an LLM-first approach is analogous to DC electricity — it works but cannot scale to meet the growing needs of businesses, the environment and consumers. The solution is AC: an efficient agent-first approach, just as AC electricity replaced DC for large-scale distribution. Efficient AI can help deploy AC-like agents for the world."
+              }
+            },
+
+            {
+              "@type": "Question",
+              "name": "What is the Agentic Internet?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Agentic Internet is a reimagined version of the current internet where consumers and businesses interact directly with agents through voice, text or video. It uses the existing Web1, Web2 and Web3 infrastructure as the backbone but adds an agentic layer for the experiencing part. Building the Agentic Internet requires solving five foundational challenges: accessibility of agents, identity of agents, security and privacy of agents, control back to consumers, and trustworthiness of agents."
+              }
+            },
+
+            {
+              "@type": "Question",
+              "name": "What is an artificial shopper's mind?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "An artificial shopper's mind is AFCP AI's approach to building AI that understands and anticipates shopper behaviour with precision. Rather than relying on large models alone, it is an artificial mind specific to cracking shopping intelligence — one that plans, remembers, and pursues goals for a shopper based on real-world experiences. It enables instant hyper-personalised searches and suggestions, agentic buying and guiding for instant or repeat purchases, and automation of shopping tasks like research."
+              }
+            },
+
+            {
+              "@type": "Question",
+              "name": "How does Experiential AI differ from Generative AI?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Generative AI was the last revolution. Experiential AI is the new approach needed for the Agentic future. While Generative AI relies on large pre-trained models and high inference compute, Experiential AI builds agents that are human-first, collaborative and self-learning. The architecture can be hybrid and use components of Generative AI, but without being restricted to it. Experiential AI agents learn by experience continually, consume less energy and compute, can be governed, and are safe, reliable, and self-adaptive."
+              }
+            }
+
+          ]
+        }
+
+      ]
+    }
+    </script>
+
+    <style>
+        /* ── Google Fonts ── */
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+        /* ── Page base: override Bootstrap & site defaults ── */
         body {
-            background-color: var(--bg);
-            color: var(--text-primary);
-            font-family: 'DM Sans', sans-serif;
+            background-color: #1d1d1d !important;
+            color: #f5f5f0 !important;
+            font-family: 'DM Sans', sans-serif !important;
             font-size: 1.05rem;
             line-height: 1.8;
         }
 
+        /* Reset any light backgrounds Bootstrap or home.css may inject */
+        body .container,
+        body .container-fluid,
+        body .row {
+            background-color: transparent !important;
+        }
+
         /* ── Hero ── */
         .thesis-hero {
+            background-color: #1d1d1d;
             padding: 10rem 0 5rem;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
             position: relative;
             overflow: hidden;
         }
@@ -53,7 +313,7 @@
             font-weight: 500;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: var(--accent);
+            color: #e09900 !important;
             border: 1px solid rgba(224,153,0,0.35);
             padding: 0.35rem 0.9rem;
             border-radius: 2px;
@@ -65,7 +325,7 @@
             font-size: clamp(2.8rem, 5vw, 4.8rem);
             font-weight: 400;
             line-height: 1.1;
-            color: var(--text-primary);
+            color: #f5f5f0 !important;
             margin-bottom: 2rem;
             max-width: 820px;
         }
@@ -74,7 +334,7 @@
             font-family: 'DM Sans', sans-serif;
             font-size: 1.15rem;
             font-weight: 300;
-            color: var(--text-secondary);
+            color: rgba(245,245,240,0.6) !important;
             max-width: 600px;
             line-height: 1.7;
             font-style: italic;
@@ -83,7 +343,7 @@
         .thesis-meta {
             margin-top: 3rem;
             padding-top: 2rem;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid rgba(255,255,255,0.08);
             display: flex;
             gap: 3rem;
             flex-wrap: wrap;
@@ -93,12 +353,12 @@
             font-size: 0.78rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--text-secondary);
+            color: rgba(245,245,240,0.6) !important;
         }
 
         .thesis-meta-item span {
             display: block;
-            color: var(--text-primary);
+            color: #f5f5f0 !important;
             font-weight: 500;
             margin-top: 0.25rem;
             letter-spacing: 0;
@@ -108,8 +368,9 @@
 
         /* ── Sections ── */
         .thesis-section {
+            background-color: #1d1d1d;
             padding: 5rem 0;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         .thesis-section:last-of-type {
@@ -119,7 +380,7 @@
         .section-number {
             font-family: 'DM Serif Display', serif;
             font-size: 0.75rem;
-            color: var(--accent);
+            color: #e09900 !important;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             margin-bottom: 1.2rem;
@@ -130,89 +391,49 @@
             font-family: 'DM Serif Display', serif;
             font-size: clamp(1.8rem, 3vw, 2.8rem);
             font-weight: 400;
-            color: var(--text-primary);
+            color: #f5f5f0 !important;
             line-height: 1.2;
             margin-bottom: 2.5rem;
         }
 
-        .thesis-body p {
-            color: var(--text-secondary);
+        /* Body text — explicit colour beats Bootstrap p {} */
+        .thesis-body p,
+        .thesis-body p.lead {
+            color: rgba(245,245,240,0.65) !important;
             font-size: 1.05rem;
             line-height: 1.9;
             margin-bottom: 1.5rem;
             font-weight: 300;
         }
 
-        .thesis-body p strong {
-            color: var(--text-primary);
+        .thesis-body p strong,
+        .thesis-body li strong {
+            color: #f5f5f0 !important;
             font-weight: 500;
         }
 
         /* Pull quote */
         .pull-quote {
-            border-left: 3px solid var(--accent);
+            border-left: 3px solid #e09900;
             padding: 1.2rem 0 1.2rem 2rem;
             margin: 2.5rem 0;
         }
 
         .pull-quote p {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'DM Serif Display', serif !important;
             font-size: 1.35rem !important;
             font-style: italic;
-            color: var(--text-primary) !important;
+            color: #f5f5f0 !important;
             line-height: 1.5 !important;
             margin: 0 !important;
             font-weight: 400;
         }
 
-        /* Pillars grid */
-        .pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2.5rem;
-        }
-
-        .pillar-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.8rem 1.5rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .pillar-card:hover {
-            border-color: rgba(224,153,0,0.3);
-        }
-
-        .pillar-icon {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .pillar-title {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 0.6rem;
-        }
-
-        .pillar-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* Agentic pillars — four requirements */
+        /* Requirement list */
         .req-list {
             list-style: none;
             padding: 0;
-            margin: 2rem 0 2rem;
+            margin: 2rem 0;
         }
 
         .req-list li {
@@ -220,12 +441,12 @@
             align-items: flex-start;
             gap: 1rem;
             padding: 1.1rem 1.4rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
+            background: #242424;
+            border: 1px solid rgba(255,255,255,0.08);
             border-radius: 8px;
             margin-bottom: 0.75rem;
             font-size: 0.98rem;
-            color: var(--text-secondary);
+            color: rgba(245,245,240,0.65) !important;
             line-height: 1.6;
             transition: border-color 0.3s ease;
         }
@@ -238,7 +459,7 @@
             flex-shrink: 0;
             width: 1.6rem;
             height: 1.6rem;
-            background: var(--accent-soft);
+            background: rgba(224,153,0,0.12);
             border: 1px solid rgba(224,153,0,0.35);
             border-radius: 50%;
             display: flex;
@@ -246,16 +467,20 @@
             justify-content: center;
             font-size: 0.72rem;
             font-weight: 600;
-            color: var(--accent);
+            color: #e09900 !important;
             margin-top: 0.1rem;
         }
 
+        .req-list li div {
+            color: rgba(245,245,240,0.65);
+        }
+
         .req-list li strong {
-            color: var(--text-primary);
+            color: #f5f5f0 !important;
             font-weight: 500;
         }
 
-        /* Join section */
+        /* Join / CTA section */
         .thesis-join {
             background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #db2777 100%);
             border-radius: 16px;
@@ -276,16 +501,16 @@
         }
 
         .thesis-join h2 {
-            font-family: 'DM Serif Display', serif;
+            font-family: 'DM Serif Display', serif !important;
             font-size: clamp(1.8rem, 3vw, 2.6rem);
-            color: #ffffff;
+            color: #ffffff !important;
             margin-bottom: 1.2rem;
             font-weight: 400;
             position: relative;
         }
 
         .thesis-join p {
-            color: rgba(255,255,255,0.85);
+            color: rgba(255,255,255,0.85) !important;
             font-size: 1.05rem;
             max-width: 520px;
             margin: 0 auto 2.5rem;
@@ -297,7 +522,7 @@
         .thesis-join .btn-join {
             display: inline-block;
             background: #ffffff;
-            color: #1e3a8a;
+            color: #1e3a8a !important;
             font-weight: 700;
             font-size: 1rem;
             padding: 1rem 2.5rem;
@@ -309,52 +534,32 @@
         }
 
         .thesis-join .btn-join:hover {
-            background: var(--accent);
-            color: #ffffff;
+            background: #e09900;
+            color: #ffffff !important;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(0,0,0,0.3);
         }
 
-        /* Layout helpers */
+        /* Layout containers */
         .thesis-container {
             max-width: 820px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
-        .thesis-container-wide {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Divider mark */
+        /* Accent divider */
         .section-divider {
             width: 40px;
             height: 2px;
-            background: var(--accent);
+            background: #e09900;
             margin-bottom: 2rem;
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
-            .thesis-hero {
-                padding: 8rem 0 4rem;
-            }
-            .thesis-join {
-                padding: 3rem 1.5rem;
-            }
-            .thesis-meta {
-                gap: 1.5rem;
-            }
-            .pillars-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .pillars-grid {
-                grid-template-columns: 1fr;
-            }
+            .thesis-hero { padding: 8rem 0 4rem; }
+            .thesis-join { padding: 3rem 1.5rem; }
+            .thesis-meta { gap: 1.5rem; }
         }
     </style>
 </head>
@@ -470,10 +675,45 @@
         </div>
     </section>
 
-    <!-- ── 04 Experiential AI ── -->
+    <!-- ── 04 Agentic Foundation ── -->
     <section class="thesis-section">
         <div class="thesis-container">
-            <span class="section-number">04 &nbsp;/&nbsp; Experiential AI</span>
+            <span class="section-number">04 &nbsp;/&nbsp; The Agentic Foundation</span>
+            <div class="section-divider"></div>
+            <h2 class="section-heading">The Agentic solution needs<br>a new foundation.</h2>
+            <div class="thesis-body">
+                <p>For this foundation to exist, we need an efficient Agentic architecture without relying heavily on models.</p>
+
+                <ul class="req-list">
+                    <li>
+                        <span class="req-num">1</span>
+                        <div><strong>Models cannot scale with the real world.</strong> They lack continual learning and memory. We can solve this by building Agents that continually learn, improve and perform intelligent decisions and actions.</div>
+                    </li>
+                    <li>
+                        <span class="req-num">2</span>
+                        <div><strong>Generative AI is using a lot of training and inference compute.</strong> This is not needed. We can reduce this by 10x by implementing better strategies to build AI agents that can scale. We aim to consume 10x less infrastructure, compute and energy when compared with models.</div>
+                    </li>
+                    <li>
+                        <span class="req-num">3</span>
+                        <div><strong>An agentic paradigm is simple.</strong> It consumes less energy, less compute, less capital, learns by experience continually, can be governed, is safe and reliable. It considers the human brain as the standard for building AI. We also believe agents can be decentralized and democratized rather than centralized.</div>
+                    </li>
+                    <li>
+                        <span class="req-num">4</span>
+                        <div><strong>This new paradigm also needs clean, white-labelled data from Ecommerce data providers.</strong> This data can help us build a reliable agent that customers can trust.</div>
+                    </li>
+                    <li>
+                        <span class="req-num">5</span>
+                        <div><strong>The new approach is a type of Experiential AI, not Generative AI.</strong> The architecture can be hybrid and use components of Generative AI, but without being restricted to it.</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 05 Experiential AI ── -->
+    <section class="thesis-section">
+        <div class="thesis-container">
+            <span class="section-number">05 &nbsp;/&nbsp; Experiential AI</span>
             <div class="section-divider"></div>
             <h2 class="section-heading">The next frontier in AI<br>is Experiential AI.</h2>
             <div class="thesis-body">
@@ -484,7 +724,7 @@
         </div>
     </section>
 
-    <!-- ── 05 Join Us ── -->
+    <!-- ── 06 Join Us ── -->
     <section class="thesis-section" style="border-bottom: none;">
         <div class="thesis-container">
             <div class="thesis-join">
