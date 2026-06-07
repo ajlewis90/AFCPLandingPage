@@ -5,9 +5,9 @@ app_name='landing_page'
 
 urlpatterns = [
 
-    #url(r'^$', landing_page_views.display_landing_page, name='display_landing_page'),
-
     path('', landing_page_views.display_landing_page, name='landing_page'),
+
+    path('our-thesis/', landing_page_views.display_our_thesis, name='our_thesis'),
 
     #path('businesses/', landing_page_views.display_b2b_signup_page, name='b2b_signup_page'),
 

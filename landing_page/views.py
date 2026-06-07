@@ -8,6 +8,10 @@ def display_landing_page(request):
         context = dict()
         return render(request, 'afcp_landing_page.html', context)
 
+def display_our_thesis(request):
+        context = dict()
+        return render(request, 'our_thesis.html', context)
+
 def display_b2b_signup_page(request):
         context = dict()
         context['business_sign_up'] = True

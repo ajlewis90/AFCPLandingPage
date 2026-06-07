@@ -1,0 +1,503 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AFCP AI | Our Thesis</title>
+    {% include 'landing_page_head.html' %}
+
+    <style>
+        /* ── Thesis page typography & layout ── */
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+        :root {
+            --bg: #1d1d1d;
+            --surface: #242424;
+            --border: rgba(255,255,255,0.08);
+            --text-primary: #f5f5f0;
+            --text-secondary: rgba(245,245,240,0.6);
+            --accent: #e09900;
+            --accent-soft: rgba(224,153,0,0.12);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* ── Hero ── */
+        .thesis-hero {
+            padding: 10rem 0 5rem;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thesis-hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(224,153,0,0.07) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .thesis-label {
+            display: inline-block;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(224,153,0,0.35);
+            padding: 0.35rem 0.9rem;
+            border-radius: 2px;
+            margin-bottom: 2.5rem;
+        }
+
+        .thesis-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.8rem, 5vw, 4.8rem);
+            font-weight: 400;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            max-width: 820px;
+        }
+
+        .thesis-tagline {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .thesis-meta {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .thesis-meta-item {
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .thesis-meta-item span {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-top: 0.25rem;
+            letter-spacing: 0;
+            text-transform: none;
+            font-size: 0.9rem;
+        }
+
+        /* ── Sections ── */
+        .thesis-section {
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .thesis-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-number {
+            font-family: 'DM Serif Display', serif;
+            font-size: 0.75rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            display: block;
+        }
+
+        .section-heading {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            font-weight: 400;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 2.5rem;
+        }
+
+        .thesis-body p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .thesis-body p strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Pull quote */
+        .pull-quote {
+            border-left: 3px solid var(--accent);
+            padding: 1.2rem 0 1.2rem 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .pull-quote p {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.35rem !important;
+            font-style: italic;
+            color: var(--text-primary) !important;
+            line-height: 1.5 !important;
+            margin: 0 !important;
+            font-weight: 400;
+        }
+
+        /* Pillars grid */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .pillar-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.8rem 1.5rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .pillar-card:hover {
+            border-color: rgba(224,153,0,0.3);
+        }
+
+        .pillar-icon {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .pillar-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+        }
+
+        .pillar-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Agentic pillars — four requirements */
+        .req-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0 2rem;
+        }
+
+        .req-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.1rem 1.4rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            font-size: 0.98rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            transition: border-color 0.3s ease;
+        }
+
+        .req-list li:hover {
+            border-color: rgba(224,153,0,0.3);
+        }
+
+        .req-list li .req-num {
+            flex-shrink: 0;
+            width: 1.6rem;
+            height: 1.6rem;
+            background: var(--accent-soft);
+            border: 1px solid rgba(224,153,0,0.35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 0.1rem;
+        }
+
+        .req-list li strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Join section */
+        .thesis-join {
+            background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #db2777 100%);
+            border-radius: 16px;
+            padding: 4rem 3rem;
+            text-align: center;
+            margin-top: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thesis-join::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .thesis-join h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+            font-weight: 400;
+            position: relative;
+        }
+
+        .thesis-join p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.05rem;
+            max-width: 520px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .thesis-join .btn-join {
+            display: inline-block;
+            background: #ffffff;
+            color: #1e3a8a;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            letter-spacing: 0.02em;
+        }
+
+        .thesis-join .btn-join:hover {
+            background: var(--accent);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        /* Layout helpers */
+        .thesis-container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .thesis-container-wide {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Divider mark */
+        .section-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .thesis-hero {
+                padding: 8rem 0 4rem;
+            }
+            .thesis-join {
+                padding: 3rem 1.5rem;
+            }
+            .thesis-meta {
+                gap: 1.5rem;
+            }
+            .pillars-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'landing_page_navigation.html' %}
+
+    <!-- ── Hero ── -->
+    <section class="thesis-hero">
+        <div class="thesis-container">
+            <div class="thesis-label">AFCP AI &nbsp;·&nbsp; Memo &amp; Thesis</div>
+            <h1 class="thesis-title">Shopper Agents that make life easier for everyone</h1>
+            <p class="thesis-tagline">Just autonomous, efficient &amp; reliable agents that do the work.</p>
+            <div class="thesis-meta">
+                <div class="thesis-meta-item">
+                    Published by
+                    <span>AFCP AI</span>
+                </div>
+                <div class="thesis-meta-item">
+                    Category
+                    <span>Agentic Commerce</span>
+                </div>
+                <div class="thesis-meta-item">
+                    Year
+                    <span>2025</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 01 Our Story ── -->
+    <section class="thesis-section">
+        <div class="thesis-container">
+            <span class="section-number">01 &nbsp;/&nbsp; Our Story</span>
+            <div class="section-divider"></div>
+            <h2 class="section-heading">Agents are the gateway<br>to the new economy.</h2>
+            <div class="thesis-body">
+                <p>The old way of building ecommerce solutions held us back. We ourselves struggled to build ecommerce solutions in the past — we had to build an ecommerce app, a website, and a tablet app, and test them separately. It was a nightmare.</p>
+                <p>We do not want other businesses to face this nightmare. We want building, testing, and deploying ecommerce solutions to be effortless. <strong>We want to reduce the time from building an ecommerce store to selling ecommerce products.</strong></p>
+                <p>That is why we are building an Agentic Commerce Infrastructure for ecommerce businesses at AFCP AI. Using our platform, businesses can launch and deploy a shopper agent that their customers can trust. The shopper agent can help their customers shop safely and seamlessly, just like a friend. AFCP AI leverages efficient agents to foster human-AI collaboration in a sustainable manner for ecommerce businesses and consumers alike.</p>
+
+                <div class="pull-quote">
+                    <p>The world is moving towards agents. Agents will become the shopping interface for commerce.</p>
+                </div>
+
+                <p>Agentic shopping — which includes agents collaborating with each other, agents handling all repetitive shopping tasks, and shopping over voice — will become the common approach used by customers of businesses to shop online. Agents will synchronize the world of commerce, becoming almost like electricity.</p>
+                <p>That is what our platform is about. An Agentic Commerce Infrastructure here to help retailers build shopper agents. Our platform's goal is to be the largest provider of agents for commerce. These agents are seamless to integrate and provide immense value to businesses, consumers, and partners.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 02 Who We Are ── -->
+    <section class="thesis-section">
+        <div class="thesis-container">
+            <span class="section-number">02 &nbsp;/&nbsp; Who We Are</span>
+            <div class="section-divider"></div>
+            <h2 class="section-heading">We are creating the<br>Agentic Internet.</h2>
+            <div class="thesis-body">
+                <p>The current internet is slow, fragmented and a big mess. Problems with identity, security and governance remain largely unsolved. To understand where we are going, it helps to trace where we have been.</p>
+                <p>During the early computing revolution, computers solved concrete, bounded problems: typing, reading, doing math. This was followed by the gaming revolution, where people began experiencing more on computers, not just doing. <strong>We are now in the AI revolution, and we believe this revolution is fundamentally about agents.</strong></p>
+                <p>The world will look very different with agents in the picture. Agents must be reliable, affordable and scalable. To get there, we must use the old internet — Web1, Web2 and Web3 — as the backbone, but build an agentic layer on top for the experiencing part. Consumers and businesses can then interact directly with agents through voice, text or video.</p>
+
+                <div class="pull-quote">
+                    <p>The old internet was the backbone. The agentic layer is where people will live.</p>
+                </div>
+
+                <p>Reimagining the old internet as an agentic one means solving four foundational requirements:</p>
+
+                <ul class="req-list">
+                    <li>
+                        <span class="req-num">1</span>
+                        <div><strong>Accessibility of agents</strong> — agents must be reachable by anyone, anywhere, across every device and channel.</div>
+                    </li>
+                    <li>
+                        <span class="req-num">2</span>
+                        <div><strong>Identity of agents</strong> — every agent must have a verifiable, trustworthy identity so people know who they are dealing with.</div>
+                    </li>
+                    <li>
+                        <span class="req-num">3</span>
+                        <div><strong>Security and privacy of agents</strong> — interactions must be safe, data must be protected, and agents must not become vectors for harm.</div>
+                    </li>
+                    <li>
+                        <span class="req-num">4</span>
+                        <div><strong>Control back to consumers</strong> — agents must empower people, not extract from them. Consumers must remain in charge of their own data and decisions.</div>
+                    </li>
+                    <li>
+                        <span class="req-num">5</span>
+                        <div><strong>Trustworthiness of agents</strong> — agents must behave honestly, transparently and predictably. A trustworthy agent earns repeated use; an untrustworthy one destroys the relationship in a single interaction.</div>
+                    </li>
+                </ul>
+
+                <p>Tim Berners-Lee envisioned an internet where consumers had complete control over their rights on data. Building an agentic internet with blockchain technologies can move us closer to that path — and that is the direction we are building towards.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 03 Efficient AI ── -->
+    <section class="thesis-section">
+        <div class="thesis-container">
+            <span class="section-number">03 &nbsp;/&nbsp; The Case for Efficient AI</span>
+            <div class="section-divider"></div>
+            <h2 class="section-heading">The new foundations<br>of commerce demand<br>efficient AI.</h2>
+            <div class="thesis-body">
+                <p>We believe the world needs Efficient AI — AI that is like electricity, scalable, affordable and reliable. We must build AI that consumes fewer chips, compute and energy. Experiential AI can help us get there, by helping us deploy Agents which are efficient for the world.</p>
+                <p>Compute and energy costs are rising making LLMs unsuitable for efficient scaling in the long run. This means a new hybrid AI architecture is needed for efficiently carrying out thinking, planning, reasoning or acting.</p>
+
+                <div class="pull-quote">
+                    <p>Electricity is needed and useful, however the architecture and infrastructure cannot catch up with the growing needs of businesses, environment and consumers.</p>
+                </div>
+
+                <p>This is akin to the DC distribution crisis of electricity. AI that is built in an LLM-first approach is analogous to DC.</p>
+                <p>We do not need electricity (AI) based on DC (LLM-first paradigm), we need AC — an efficient agent-first approach. Efficient AI can help us deploy AC like Agents for the world.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 04 Experiential AI ── -->
+    <section class="thesis-section">
+        <div class="thesis-container">
+            <span class="section-number">04 &nbsp;/&nbsp; Experiential AI</span>
+            <div class="section-divider"></div>
+            <h2 class="section-heading">The next frontier in AI<br>is Experiential AI.</h2>
+            <div class="thesis-body">
+                <p>We at AFCP AI are working on a new approach for building our Agentic commerce infrastructure based on Experiential AI.</p>       
+                <p>The last revolution was Generative AI. The new Agentic future needs an Experiential AI revolution. Building agents from an Experiential AI standpoint will be more relevant since consumers and businesses like to experience more. Experiential AI is all about building human-first, collaborative and self-learning agents for the world — the way to build agents that are reliable, affordable and scalable.</p>
+                <p>Experiential AI uses shopper agents that are not only active helpers for consumers but also interactive and fun to be with. Our shopper agents can make corrections in case a mistake happened, continuously learning with the aid of human intervention and therefore becoming self-adaptive.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 05 Join Us ── -->
+    <section class="thesis-section" style="border-bottom: none;">
+        <div class="thesis-container">
+            <div class="thesis-join">
+                <h2>Join us in building the future of commerce.</h2>
+                <p>We are at the beginning of something significant. If you are a retailer who believes your customers deserve better, or a partner who wants to be part of the agentic commerce movement, we want to hear from you.</p>
+                <a href="/#business-signup" class="btn-join">Book a Demo</a>
+            </div>
+        </div>
+    </section>
+
+    {% include 'landing_page_footer.html' %}
+
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
