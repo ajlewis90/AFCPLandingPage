@@ -1,0 +1,36 @@
+/* ============================================
+   Solution Demo Video Block
+   Add this to problem_solution_fold.css
+   ============================================ */
+
+.ps-video-demo {
+    width: 100%;
+}
+
+.ps-video-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    background: #000;
+    box-sizing: border-box;
+}
+
+.ps-video {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+    background: #000;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .ps-video-wrapper {
+        border-radius: 10px;
+    }
+}
