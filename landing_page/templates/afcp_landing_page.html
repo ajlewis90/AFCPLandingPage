@@ -20,64 +20,93 @@
       padding-bottom: 2rem;
   }
   header.masthead .overlay{position:absolute;background-color:#212529;height:100%;width:100%;top:0;left:0;opacity:.3}
-  
-  /* Hero Section Responsive Styles */
+
+  /* Hero content wrapper now only handles horizontal gutters.
+     Vertical rhythm is controlled by the section-spacing rules below
+     so the hero lines up with every other fold. */
   .hero-content-wrapper {
     position: relative;
-    padding: 4rem 2rem;
+    padding: 0 2rem;
     text-align: center;
   }
-  
+
+  /* ==========================================================
+     UNIFIED FOLD TITLE TYPOGRAPHY
+     One consistent scale for every section title (hero H1,
+     "mission" H2 titles used across folds, the problem/solution
+     title, and sub-titles) so nothing looks oversized or
+     undersized relative to its neighbours while scrolling.
+     ========================================================== */
+  .hero-content h1 { font-size: 3.5rem !important; line-height: 1.2 !important; }
+  h2.mission,
+  .ps-section-title { font-size: 3rem !important; }
+  .fold-subtitle { font-size: 2.25rem !important; }
+
+  @media (max-width: 991px) {
+    .hero-content h1 { font-size: 3rem !important; }
+    h2.mission,
+    .ps-section-title { font-size: 2.5rem !important; }
+    .fold-subtitle { font-size: 2rem !important; }
+  }
 
   @media (max-width: 768px) {
-    .hero-content-wrapper {
-        padding: 3rem 1.5rem;
-    }
-    
+    .hero-content-wrapper { padding: 0 1.5rem; }
 
-    .hero-content h1 {
-        font-size: 2.5rem !important;
-        line-height: 1.3 !important;
-    }
-    
-    .hero-content .lead {
-        font-size: 1.2rem !important;
-    }
-    
-    .hero-content p {
-        font-size: 1rem !important;
-    }
+    .hero-content h1 { font-size: 2.5rem !important; line-height: 1.3 !important; }
+    h2.mission,
+    .ps-section-title { font-size: 2rem !important; }
+    .fold-subtitle { font-size: 1.85rem !important; }
+
+    .hero-content .lead { font-size: 1.2rem !important; }
+    .hero-content p { font-size: 1rem !important; }
   }
-  
-  @media (max-width: 544px) {
-    header.masthead {
-        padding-top: 10rem;
-        padding-bottom: 4rem;
-    }
-    header.masthead h3 {
-        font-size: 4rem;
-    }
-    
-    .hero-content-wrapper {
-        padding: 2rem 1rem;
-    }
-    
+
+  @media (max-width: 576px) {
+    .hero-content-wrapper { padding: 0 1rem; }
 
     .hero-content h1 {
         font-size: 2rem !important;
         line-height: 1.4 !important;
         margin-bottom: 1rem !important;
     }
-    
+    h2.mission,
+    .ps-section-title { font-size: 1.75rem !important; }
+    .fold-subtitle { font-size: 1.5rem !important; }
+
     .hero-content .lead {
         font-size: 1.1rem !important;
         margin-bottom: 1.5rem !important;
     }
-    
     .hero-content p {
         font-size: 0.95rem !important;
         margin-bottom: 2rem !important;
     }
+  }
+
+  /* ==========================================================
+     UNIFIED FOLD SPACING
+     Every fold now shares the same vertical rhythm so the gap
+     between sections feels identical while scrolling. The
+     hero's own padding-top is left untouched since it also
+     clears the fixed navigation bar.
+     ========================================================== */
+  #home-old { padding-bottom: 5rem !important; }
+  section.py-5,
+  .masthead { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+  .ps-section-header { padding-top: 5rem !important; }
+
+  @media (max-width: 768px) {
+    #home-old { padding-bottom: 3.5rem !important; }
+    section.py-5,
+    .masthead { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
+    .ps-section-header { padding-top: 3.5rem !important; }
+  }
+
+  @media (max-width: 576px) {
+    #home-old { padding-bottom: 3rem !important; }
+    section.py-5,
+    .masthead { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+    .ps-section-header { padding-top: 3rem !important; }
   }
   </style>
   </head>
@@ -85,19 +114,31 @@
   {% include 'landing_page_navigation.html' %}
 
 
-    <section class="pt-8 pb-4" id="home-old">
+    <!-- Fold 1: Hero Image -->
+    <section class="pt-8" id="home-old">
+           <div class="container-fluid">
+               <div class="row justify-content-center">
+                  <div class="col-lg-10 col-xl-8">
+                      <div class="hero-content-wrapper">
+                          <div class="hero-image-block">
+                              <img src="{% static 'img/hero-river-of-days-title.png' %}" class="img-fluid rounded" alt="Community enjoying free time while shopper agents handle the work" style="max-width: 100%; height: auto;" />
+                          </div>
+                      </div>
+                  </div>
+               </div>
+           </div>
+       </section>
+
+    <!-- Fold 2: Hero Title, Copy & CTA -->
+    <section class="py-5" id="hero-content-fold">
            <div class="container-fluid">
                <div class="row justify-content-center">
                   <div class="col-lg-10 col-xl-8">
                       <div class="hero-content-wrapper">
                           <!-- Content -->
                           <div class="hero-content" style="position: relative; z-index: 2; max-width: 1100px; margin: 0 auto;">
-                              <div class="hero-image-block" style="margin-bottom: 2.5rem;">
-                                  <img src="{% static 'img/hero-river-of-days-title.png' %}" class="img-fluid rounded" alt="Community enjoying free time while shopper agents handle the work" style="max-width: 100%; height: auto;" />
-                              </div>
-
                               <h1 style="color: #ffffff; font-size: 3.5rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.2;">
-                                   Give your customers freedom to enjoy life
+                                   Your customers need freedom to enjoy life
                               </h1>
                               
                               <p class="lead mb-4" style="color: #ffffff; font-size: 1.4rem; line-height: 1.6; max-width: 950px; margin: 0 auto 2rem;">
