@@ -42,6 +42,10 @@
   .ps-section-title { font-size: 3rem !important; }
   .fold-subtitle { font-size: 2.25rem !important; }
 
+  /* Fold 1 (hero image) needs its own top buffer so the fixed
+     navigation bar never overlaps the image, especially on mobile. */
+  #home-old .hero-content-wrapper { padding-top: 4rem; }
+
   @media (max-width: 991px) {
     .hero-content h1 { font-size: 3rem !important; }
     h2.mission,
@@ -51,6 +55,7 @@
 
   @media (max-width: 768px) {
     .hero-content-wrapper { padding: 0 1.5rem; }
+    #home-old .hero-content-wrapper { padding-top: 3.5rem; }
 
     .hero-content h1 { font-size: 2.5rem !important; line-height: 1.3 !important; }
     h2.mission,
@@ -63,6 +68,7 @@
 
   @media (max-width: 576px) {
     .hero-content-wrapper { padding: 0 1rem; }
+    #home-old .hero-content-wrapper { padding-top: 3rem; }
 
     .hero-content h1 {
         font-size: 2rem !important;
