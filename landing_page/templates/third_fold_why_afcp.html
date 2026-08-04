@@ -1,7 +1,8 @@
 {% load static %}
-<!-- Problem-Solution Section (Third Fold) -->
-<link rel="stylesheet" href="{% static 'css/problem_solution_fold.css' %}">
-
+<!-- Problem-Solution Section (Third Fold)
+     Styles for this section live in static/css/problem_solution_fold.css
+     and static/css/problem_solution_video.css, both linked from
+     afcp_landing_page.html's <head>. -->
 <section class="problem-solution-section">
     
     <!-- Section Title -->
@@ -55,14 +56,64 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <video class="img-fluid rounded" aria-label="AFCP Shopper Agent solution demo video" style="width: 100%; max-height: 600px; object-fit: contain;" controls controlsList="nodownload" muted loop playsinline preload="metadata">
-                        <source src="{% static 'media/afcp-shoes.webm' %}" type="video/webm">
-                        <source src="{% static 'media/afcp-shoes.mp4' %}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                    <div class="ps-demo-video-frame">
+                        <!-- Sierra-style: no controls, muted + looping, only loads/plays
+                             once scrolled into view. Poster shows instantly so there's
+                             no blank flash while the clip loads. -->
+                        <video
+                            id="ps-demo-video"
+                            class="ps-lazy-video"
+                            aria-label="AFCP Shopper Agent solution demo video"
+                            muted
+                            loop
+                            playsinline
+                            preload="none"
+                            poster="{% static 'media/afcp-lego-toys-placeholder.jpg' %}">
+                            <source data-src="{% static 'media/afcp-lego-toys.webm' %}" type="video/webm">
+                            <source data-src="{% static 'media/afcp-lego-toys.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var video = document.getElementById('ps-demo-video');
+    if (!video) { return; }
+
+    function activate(v) {
+        var sources = v.querySelectorAll('source[data-src]');
+        var needsLoad = false;
+        sources.forEach(function (s) {
+            if (!s.src) {
+                s.src = s.dataset.src;
+                needsLoad = true;
+            }
+        });
+        if (needsLoad) { v.load(); }
+        v.play().catch(function () {});
+    }
+
+    if (!('IntersectionObserver' in window)) {
+        activate(video);
+        return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                activate(entry.target);
+            } else {
+                entry.target.pause();
+            }
+        });
+    }, { threshold: 0.35 });
+
+    io.observe(video);
+});
+</script>
