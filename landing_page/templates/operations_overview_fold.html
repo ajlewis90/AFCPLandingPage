@@ -1,5 +1,8 @@
 {% load static %}
-<!-- Operations Overview Section (3 cards, sits before "Create Shopper Agents in minutes!")
+<!-- Operations Overview Section
+     Lassie-style "scroll stack": a sticky video panel that cross-fades
+     between clips as you scroll past the copy beside it — only one
+     video is ever active/playing at a time.
      Styles for this section live in static/css/operations_overview_fold.css,
      linked from afcp_landing_page.html's <head>. -->
 
@@ -18,109 +21,100 @@
             </div>
         </div>
 
-        <!-- 3 Cards Side by Side -->
+        <!-- Scroll Stack: sticky video + scrolling copy -->
         <div class="row justify-content-center">
             <div class="col-lg-11 col-xl-10">
-                <div class="ops-grid">
+                <div class="ops-scrollstack" id="ops-scrollstack">
 
-                    <!-- Card 1: The Four Pillars -->
-                    <div class="ops-card">
-                        <div class="ops-visual">
-                            <video
-                                class="ops-visual-video"
-                                muted
-                                loop
-                                playsinline
-                                preload="none"
-                                poster="{% static 'media/ask-AI-anything-placeholder.jpg' %}"
-                                data-src="{% static 'media/ask-AI-anything.mp4' %}">
-                            </video>
+                    <!-- Sticky media panel -->
+                    <div class="ops-scrollstack-media">
+                        <div class="ops-media-frame">
+                            <video class="ops-stack-video" data-index="0" muted loop playsinline preload="none"
+                                   poster="{% static 'media/ask-AI-anything-placeholder.jpg' %}"
+                                   data-src="{% static 'media/ask-AI-anything.mp4' %}"></video>
+                            <video class="ops-stack-video" data-index="1" muted loop playsinline preload="none"
+                                   poster="{% static 'media/visibility-placeholder.jpg' %}"
+                                   data-src="{% static 'media/visibility.mp4' %}"></video>
+                            <video class="ops-stack-video" data-index="2" muted loop playsinline preload="none"
+                                   poster="{% static 'media/helpdesk-placeholder.jpg' %}"
+                                   data-src="{% static 'media/helpdesk.mp4' %}"></video>
                         </div>
-                        <div class="ops-text">
+                    </div>
+
+                    <!-- Scrolling copy -->
+                    <div class="ops-scrollstack-content">
+
+                        <div class="ops-scrollstack-item" data-index="0">
                             <h4 class="ops-card-title">Four Pillars, One Agent</h4>
                             <p class="ops-card-desc">
                                 <span class="ops-highlight">Increased bottom line, customer engagement, customer support and payments with reduced operational costs.</span>
                                 No manuals. <span class="ops-highlight">Just ask our AI</span> and get instant answers on profits, sales and revenue.
                             </p>
                         </div>
-                    </div>
 
-                    <!-- Card 2: Full Visibility -->
-                    <div class="ops-card">
-                        <div class="ops-visual">
-                            <video
-                                class="ops-visual-video"
-                                muted
-                                loop
-                                playsinline
-                                preload="none"
-                                poster="{% static 'media/visibility-placeholder.jpg' %}"
-                                data-src="{% static 'media/visibility.mp4' %}">
-                            </video>
-                        </div>
-                        <div class="ops-text">
+                        <div class="ops-scrollstack-item" data-index="1">
                             <h4 class="ops-card-title">Visibility Into Every Task</h4>
                             <p class="ops-card-desc">
                                 Every task is <span class="ops-highlight">tracked and visible</span> be it validating whether a returned product is actually broken, to flagging low stock, catching pricing mistakes, or confirming an order shipped.
                             </p>
                         </div>
-                    </div>
 
-                    <!-- Card 3: Payments & Support -->
-                    <div class="ops-card">
-                        <div class="ops-visual">
-                            <video
-                                class="ops-visual-video"
-                                muted
-                                loop
-                                playsinline
-                                preload="none"
-                                poster="{% static 'media/helpdesk-placeholder.jpg' %}"
-                                data-src="{% static 'media/helpdesk.mp4' %}">
-                            </video>
-                        </div>
-                        <div class="ops-text">
+                        <div class="ops-scrollstack-item" data-index="2">
                             <h4 class="ops-card-title">Payments &amp; Support Handled</h4>
                             <p class="ops-card-desc">
                                 Our AI takes care of your support tickets, refunds &amp; returns. We ensure secure checkout and payment processing.
                             </p>
                         </div>
+
                     </div>
 
-                </div><!-- /.ops-grid -->
+                </div><!-- /.ops-scrollstack -->
             </div>
         </div>
 
     </div>
 </section>
 
-<!-- Scroll-triggered playback: videos only load/play once their card is in view,
-     and pause again once scrolled past. Keeps the page light and makes each
-     card feel like it "comes alive" as you reach it. -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var videos = document.querySelectorAll('.ops-visual-video');
-    if (!('IntersectionObserver' in window)) {
-        // Fallback for very old browsers: just load and play everything.
-        videos.forEach(function (v) {
-            v.src = v.dataset.src;
-            v.play().catch(function () {});
-        });
-        return;
-    }
+    var stack = document.getElementById('ops-scrollstack');
+    if (!stack) { return; }
 
-    var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            var v = entry.target;
-            if (entry.isIntersecting) {
+    var items = stack.querySelectorAll('.ops-scrollstack-item');
+    var videos = stack.querySelectorAll('.ops-stack-video');
+
+    function setActive(index) {
+        items.forEach(function (item) {
+            item.classList.toggle('is-active', item.dataset.index === String(index));
+        });
+        videos.forEach(function (v) {
+            if (v.dataset.index === String(index)) {
                 if (!v.src) { v.src = v.dataset.src; }
+                v.classList.add('is-active');
                 v.play().catch(function () {});
             } else {
+                v.classList.remove('is-active');
                 v.pause();
             }
         });
-    }, { threshold: 0.35 });
+    }
 
-    videos.forEach(function (v) { io.observe(v); });
+    // Always start on the first clip.
+    setActive(0);
+
+    if (!('IntersectionObserver' in window)) { return; }
+
+    // A thin horizontal band across the vertical center of the viewport.
+    // Whichever copy block crosses that band becomes the active one —
+    // this is what keeps exactly one video "in focus" at a time as you scroll.
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                setActive(entry.target.dataset.index);
+            }
+        });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+    items.forEach(function (item) { io.observe(item); });
 });
 </script>

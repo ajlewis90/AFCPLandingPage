@@ -1,63 +1,142 @@
-.ops-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
-}
-@media (max-width: 991px) {
-    .ops-grid { grid-template-columns: 1fr; }
-}
-.ops-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    overflow: hidden;
+/* ══════════════════════════════════════════════════════════
+   Operations Overview — Scroll Stack
+   Sticky video panel + scrolling copy, one clip active at a
+   time (Lassie.ai-style).
+   ══════════════════════════════════════════════════════════ */
+
+.ops-scrollstack {
     display: flex;
-    flex-direction: column;
-    height: 100%;
-    transition: transform 0.25s ease, border-color 0.25s ease;
-}
-.ops-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.2);
+    align-items: flex-start;
+    gap: 3.5rem;
 }
 
-/* Sierra-style media block: a muted, looping, controls-free video that
-   reads as a still until it scrolls into view and starts playing.
-   TODO per-card: once you have the real product recording, just swap
-   the data-src (and poster) on that card's <video> tag. */
-.ops-visual {
+/* ── Sticky media panel ──────────────────────────────────── */
+.ops-scrollstack-media {
+    flex: 0 0 44%;
+    position: sticky;
+    top: 6rem; /* clears the fixed nav; tweak to taste */
+    align-self: flex-start;
+}
+
+.ops-media-frame {
     position: relative;
+    width: 100%;
     aspect-ratio: 4 / 3;
+    border-radius: 16px;
     overflow: hidden;
     background-color: #0f0f0f;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
-.ops-visual-video {
+
+.ops-stack-video {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
-    display: block;
-    pointer-events: none; /* no hint that it's a "player" */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none; /* no player chrome / no hint it's clickable */
 }
 
-.ops-text {
-    padding: 1.75rem 1.75rem 2rem;
-    flex: 1;
+.ops-stack-video.is-active {
+    opacity: 1;
 }
+
+/* ── Scrolling copy ──────────────────────────────────────── */
+.ops-scrollstack-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ops-scrollstack-item {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.35;
+    transition: opacity 0.4s ease;
+}
+
+.ops-scrollstack-item:first-child {
+    min-height: 45vh; /* first item doesn't need as much run-up */
+}
+
+.ops-scrollstack-item:last-child {
+    min-height: 45vh; /* nor does the last one need trailing space */
+}
+
+.ops-scrollstack-item.is-active {
+    opacity: 1;
+}
+
 .ops-card-title {
     color: #ffffff;
-    font-size: 1.35rem;
+    font-size: 1.75rem;
     font-weight: 700;
-    margin-bottom: 0.85rem;
+    margin-bottom: 1rem;
 }
+
 .ops-card-desc {
     color: rgba(255, 255, 255, 0.75);
-    font-size: 1rem;
-    line-height: 1.65;
+    font-size: 1.1rem;
+    line-height: 1.7;
     margin-bottom: 0;
+    max-width: 480px;
 }
+
 .ops-highlight {
     color: #ffffff;
     font-weight: 600;
+}
+
+/* ── Responsive: stack fully, drop the pin ───────────────── */
+@media (max-width: 991px) {
+    .ops-scrollstack {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .ops-scrollstack-media {
+        position: sticky;
+        top: 1rem;
+        flex: none;
+        width: 100%;
+        margin-bottom: 1.5rem;
+        z-index: 1;
+    }
+
+    .ops-media-frame {
+        aspect-ratio: 16 / 10;
+    }
+
+    .ops-scrollstack-item {
+        min-height: 40vh;
+    }
+
+    .ops-scrollstack-item:first-child,
+    .ops-scrollstack-item:last-child {
+        min-height: 30vh;
+    }
+
+    .ops-card-desc {
+        max-width: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .ops-media-frame {
+        aspect-ratio: 4 / 3;
+        border-radius: 12px;
+    }
+
+    .ops-card-title {
+        font-size: 1.5rem;
+    }
+
+    .ops-card-desc {
+        font-size: 1rem;
+    }
 }
