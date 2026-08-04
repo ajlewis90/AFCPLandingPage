@@ -1,7 +1,7 @@
 /* ══════════════════════════════════════════════════════════
    Operations Overview — Scroll Stack
-   Sticky video panel + scrolling copy, one clip active at a
-   time (Lassie.ai-style).
+   Sticky video panel (single, reused <video> element) + scrolling
+   copy, one clip active at a time (Lassie.ai-style).
    ══════════════════════════════════════════════════════════ */
 
 .ops-scrollstack {
@@ -12,16 +12,25 @@
 
 /* ── Sticky media panel ──────────────────────────────────── */
 .ops-scrollstack-media {
+    /* TODO: set this to match your fixed navbar's real height exactly.
+       Other folds on this page (see header.masthead) clear the nav with
+       ~9rem of top padding, so that's the default here too. If the top
+       of the video is still hidden behind the navbar, increase this. */
+    --ops-nav-clearance: 9rem;
+
     flex: 0 0 44%;
     position: sticky;
-    top: 6rem; /* clears the fixed nav; tweak to taste */
+    top: var(--ops-nav-clearance);
     align-self: flex-start;
 }
 
+/* Height is capped with min() so the frame ALWAYS fits fully below the
+   sticky offset, no matter the window size — this is what stops the
+   video from getting visually cut off at the bottom of the screen. */
 .ops-media-frame {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 3;
+    height: min(60vh, 480px);
     border-radius: 16px;
     overflow: hidden;
     background-color: #0f0f0f;
@@ -29,19 +38,18 @@
 }
 
 .ops-stack-video {
-    position: absolute;
-    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
-    opacity: 0;
-    transition: opacity 0.5s ease;
+    display: block;
     pointer-events: none; /* no player chrome / no hint it's clickable */
+    opacity: 1;
+    transition: opacity 0.22s ease;
 }
 
-.ops-stack-video.is-active {
-    opacity: 1;
+.ops-stack-video.is-fading {
+    opacity: 0;
 }
 
 /* ── Scrolling copy ──────────────────────────────────────── */
@@ -101,7 +109,7 @@
 
     .ops-scrollstack-media {
         position: sticky;
-        top: 1rem;
+        top: 5rem; /* mobile navbar clearance — tune alongside --ops-nav-clearance above */
         flex: none;
         width: 100%;
         margin-bottom: 1.5rem;
@@ -109,7 +117,7 @@
     }
 
     .ops-media-frame {
-        aspect-ratio: 16 / 10;
+        height: min(42vh, 340px);
     }
 
     .ops-scrollstack-item {
@@ -128,7 +136,7 @@
 
 @media (max-width: 576px) {
     .ops-media-frame {
-        aspect-ratio: 4 / 3;
+        height: min(38vh, 300px);
         border-radius: 12px;
     }
 

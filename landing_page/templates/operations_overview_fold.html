@@ -1,8 +1,9 @@
 {% load static %}
 <!-- Operations Overview Section
-     Lassie-style "scroll stack": a sticky video panel that cross-fades
-     between clips as you scroll past the copy beside it — only one
-     video is ever active/playing at a time.
+     Lassie-style "scroll stack": a sticky video panel that swaps clips
+     as you scroll past the copy beside it. Only ONE <video> element
+     exists in the DOM — its src/poster are swapped as the active item
+     changes, so only one clip is ever loaded in memory at a time.
      Styles for this section live in static/css/operations_overview_fold.css,
      linked from afcp_landing_page.html's <head>. -->
 
@@ -26,25 +27,28 @@
             <div class="col-lg-11 col-xl-10">
                 <div class="ops-scrollstack" id="ops-scrollstack">
 
-                    <!-- Sticky media panel -->
+                    <!-- Sticky media panel: a single video element, reused for all 3 clips -->
                     <div class="ops-scrollstack-media">
                         <div class="ops-media-frame">
-                            <video class="ops-stack-video" data-index="0" muted loop playsinline preload="none"
-                                   poster="{% static 'media/ask-AI-anything-placeholder.jpg' %}"
-                                   data-src="{% static 'media/ask-AI-anything.mp4' %}"></video>
-                            <video class="ops-stack-video" data-index="1" muted loop playsinline preload="none"
-                                   poster="{% static 'media/visibility-placeholder.jpg' %}"
-                                   data-src="{% static 'media/visibility.mp4' %}"></video>
-                            <video class="ops-stack-video" data-index="2" muted loop playsinline preload="none"
-                                   poster="{% static 'media/helpdesk-placeholder.jpg' %}"
-                                   data-src="{% static 'media/helpdesk.mp4' %}"></video>
+                            <video
+                                id="ops-stack-video"
+                                class="ops-stack-video"
+                                muted
+                                loop
+                                playsinline
+                                preload="none"
+                                poster="{% static 'media/ask-AI-anything-placeholder.jpg' %}">
+                            </video>
                         </div>
                     </div>
 
-                    <!-- Scrolling copy -->
+                    <!-- Scrolling copy — each item carries the video/poster it should load -->
                     <div class="ops-scrollstack-content">
 
-                        <div class="ops-scrollstack-item" data-index="0">
+                        <div class="ops-scrollstack-item"
+                             data-index="0"
+                             data-video="{% static 'media/ask-AI-anything.mp4' %}"
+                             data-poster="{% static 'media/ask-AI-anything-placeholder.jpg' %}">
                             <h4 class="ops-card-title">Four Pillars, One Agent</h4>
                             <p class="ops-card-desc">
                                 <span class="ops-highlight">Increased bottom line, customer engagement, customer support and payments with reduced operational costs.</span>
@@ -52,14 +56,20 @@
                             </p>
                         </div>
 
-                        <div class="ops-scrollstack-item" data-index="1">
+                        <div class="ops-scrollstack-item"
+                             data-index="1"
+                             data-video="{% static 'media/visibility.mp4' %}"
+                             data-poster="{% static 'media/visibility-placeholder.jpg' %}">
                             <h4 class="ops-card-title">Visibility Into Every Task</h4>
                             <p class="ops-card-desc">
                                 Every task is <span class="ops-highlight">tracked and visible</span> be it validating whether a returned product is actually broken, to flagging low stock, catching pricing mistakes, or confirming an order shipped.
                             </p>
                         </div>
 
-                        <div class="ops-scrollstack-item" data-index="2">
+                        <div class="ops-scrollstack-item"
+                             data-index="2"
+                             data-video="{% static 'media/helpdesk.mp4' %}"
+                             data-poster="{% static 'media/helpdesk-placeholder.jpg' %}">
                             <h4 class="ops-card-title">Payments &amp; Support Handled</h4>
                             <p class="ops-card-desc">
                                 Our AI takes care of your support tickets, refunds &amp; returns. We ensure secure checkout and payment processing.
@@ -78,29 +88,38 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var stack = document.getElementById('ops-scrollstack');
-    if (!stack) { return; }
+    var video = document.getElementById('ops-stack-video');
+    if (!stack || !video) { return; }
 
     var items = stack.querySelectorAll('.ops-scrollstack-item');
-    var videos = stack.querySelectorAll('.ops-stack-video');
+    var currentIndex = null;
+    var fadeTimer = null;
 
-    function setActive(index) {
-        items.forEach(function (item) {
-            item.classList.toggle('is-active', item.dataset.index === String(index));
+    function activate(item) {
+        var index = item.dataset.index;
+        if (String(currentIndex) === String(index)) { return; }
+        currentIndex = index;
+
+        items.forEach(function (it) {
+            it.classList.toggle('is-active', it === item);
         });
-        videos.forEach(function (v) {
-            if (v.dataset.index === String(index)) {
-                if (!v.src) { v.src = v.dataset.src; }
-                v.classList.add('is-active');
-                v.play().catch(function () {});
-            } else {
-                v.classList.remove('is-active');
-                v.pause();
-            }
-        });
+
+        // Fade the (single) video out, swap its source once it's invisible,
+        // then fade back in. Only one clip is ever loaded at a time.
+        video.classList.add('is-fading');
+        clearTimeout(fadeTimer);
+        fadeTimer = setTimeout(function () {
+            video.pause();
+            video.setAttribute('poster', item.dataset.poster);
+            video.src = item.dataset.video;
+            video.load();
+            video.play().catch(function () {});
+            video.classList.remove('is-fading');
+        }, 220);
     }
 
-    // Always start on the first clip.
-    setActive(0);
+    // Start on the first clip immediately.
+    activate(items[0]);
 
     if (!('IntersectionObserver' in window)) { return; }
 
@@ -110,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
             if (entry.isIntersecting) {
-                setActive(entry.target.dataset.index);
+                activate(entry.target);
             }
         });
     }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
