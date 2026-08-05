@@ -1,16 +1,15 @@
 {% load static %}
 <!-- Operations Overview Section
-     Lassie-style "scroll stack": a sticky video panel that swaps clips
-     as you scroll past the copy beside it. Only ONE <video> element
-     exists in the DOM — its src/poster are swapped as the active item
-     changes, so only one clip is ever loaded in memory at a time.
-     Styles for this section live in static/css/operations_overview_fold.css,
-     linked from afcp_landing_page.html's <head>. -->
+     DESKTOP  — Lassie-style sticky video (left 65 %) + scrolling copy (right).
+                One <video> element reused for all 3 clips via JS src-swap.
+     MOBILE   — Three fully-stacked cards: text on top, that clip's video below.
+                Each card has its own <video> element; JS plays/pauses on scroll.
+     Styles live in static/css/operations_overview_fold.css -->
 
 <section class="py-5" style="background-color: #1d1d1d !important;">
     <div class="container-fluid px-7 mid-container">
 
-        <!-- Header -->
+        <!-- Section header -->
         <div class="row justify-content-center mb-5">
             <div class="col-lg-10 col-xl-8 text-center">
                 <h2 class="mission" style="color: #ffffff; font-size: 3rem; font-weight: 700; margin-bottom: 1.25rem;">
@@ -22,12 +21,12 @@
             </div>
         </div>
 
-        <!-- Scroll Stack: sticky video + scrolling copy -->
-        <div class="row justify-content-center">
+        <!-- ── Desktop + Tablet scroll-stack ─────────────────────────── -->
+        <div class="row justify-content-center ops-desktop-stack">
             <div class="col-lg-11 col-xl-10">
                 <div class="ops-scrollstack" id="ops-scrollstack">
 
-                    <!-- Sticky media panel -->
+                    <!-- Sticky media panel (desktop only) -->
                     <div class="ops-scrollstack-media" id="ops-scrollstack-media">
                         <div class="ops-media-frame">
                             <video
@@ -42,7 +41,7 @@
                         </div>
                     </div>
 
-                    <!-- Scrolling copy -->
+                    <!-- Scrolling copy (desktop only) -->
                     <div class="ops-scrollstack-content">
 
                         <div class="ops-scrollstack-item"
@@ -76,11 +75,70 @@
                             </p>
                         </div>
 
-                    </div>
+                    </div><!-- /.ops-scrollstack-content -->
 
                 </div><!-- /.ops-scrollstack -->
             </div>
-        </div>
+        </div><!-- /.ops-desktop-stack -->
+
+        <!-- ── Mobile stacked cards (hidden on desktop via CSS) ────────
+             Each card: text on top, that clip's video directly below.
+             Scroll naturally — no sticky, no swapping.                 -->
+        <div class="ops-mobile-stack">
+
+            <!-- Card 1 -->
+            <div class="ops-mobile-card">
+                <div class="ops-mobile-text">
+                    <h4 class="ops-card-title">Four Pillars, One Agent</h4>
+                    <p class="ops-card-desc">
+                        <span class="ops-highlight">Increased bottom line, customer engagement, customer support and payments with reduced operational costs.</span>
+                        No manuals. <span class="ops-highlight">Just ask our AI</span> and get instant answers on profits, sales and revenue.
+                    </p>
+                </div>
+                <div class="ops-mobile-frame">
+                    <video class="ops-mobile-video"
+                           muted loop playsinline preload="none"
+                           poster="{% static 'media/ask-AI-anything-placeholder.jpg' %}"
+                           data-src="{% static 'media/ask-AI-anything.mp4' %}">
+                    </video>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="ops-mobile-card">
+                <div class="ops-mobile-text">
+                    <h4 class="ops-card-title">Visibility Into Every Task</h4>
+                    <p class="ops-card-desc">
+                        Every task is <span class="ops-highlight">tracked and visible</span> be it validating whether a returned product is actually broken, to flagging low stock, catching pricing mistakes, or confirming an order shipped.
+                    </p>
+                </div>
+                <div class="ops-mobile-frame">
+                    <video class="ops-mobile-video"
+                           muted loop playsinline preload="none"
+                           poster="{% static 'media/task-visibility-placeholder.jpg' %}"
+                           data-src="{% static 'media/task-visibility.mp4' %}">
+                    </video>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="ops-mobile-card">
+                <div class="ops-mobile-text">
+                    <h4 class="ops-card-title">Payments &amp; Support Handled</h4>
+                    <p class="ops-card-desc">
+                        Our AI takes care of your support tickets, refunds &amp; returns. We ensure secure checkout and payment processing.
+                    </p>
+                </div>
+                <div class="ops-mobile-frame">
+                    <video class="ops-mobile-video"
+                           muted loop playsinline preload="none"
+                           poster="{% static 'media/helpdesk-placeholder.jpg' %}"
+                           data-src="{% static 'media/helpdesk.mp4' %}">
+                    </video>
+                </div>
+            </div>
+
+        </div><!-- /.ops-mobile-stack -->
 
     </div>
 </section>
@@ -88,61 +146,89 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
+    /* ════════════════════════════════════════════════════════
+       DESKTOP scroll-stack (≥ 992 px)
+       ════════════════════════════════════════════════════════ */
     var mediaPanel = document.getElementById('ops-scrollstack-media');
     var stack      = document.getElementById('ops-scrollstack');
-    var video      = document.getElementById('ops-stack-video');
+    var desktopVid = document.getElementById('ops-stack-video');
 
-    if (!stack || !video || !mediaPanel) { return; }
-
-    /* ── Navbar clearance ──────────────────────────────────────────────
-       Reads the actual rendered navbar height so the sticky video panel
-       always sits just below the nav bar, never behind it.
-       Recalculates on resize / orientation change. */
+    /* Navbar clearance — measured from the real rendered navbar height
+       so the sticky panel never sits behind the fixed nav. */
     function applyNavClearance() {
-        var nav    = document.querySelector('nav.navbar');
-        var navH   = nav ? Math.ceil(nav.getBoundingClientRect().height) : 70;
+        if (!mediaPanel) { return; }
+        var nav  = document.querySelector('nav.navbar');
+        var navH = nav ? Math.ceil(nav.getBoundingClientRect().height) : 70;
         mediaPanel.style.top = (navH + 12) + 'px';
     }
-
     applyNavClearance();
     window.addEventListener('resize', applyNavClearance);
 
-    /* ── Video switcher ────────────────────────────────────────────────*/
-    var items        = stack.querySelectorAll('.ops-scrollstack-item');
-    var currentIndex = null;
-    var fadeTimer    = null;
+    if (stack && desktopVid) {
+        var items        = stack.querySelectorAll('.ops-scrollstack-item');
+        var currentIndex = null;
+        var fadeTimer    = null;
 
-    function activate(item) {
-        var index = item.dataset.index;
-        if (String(currentIndex) === String(index)) { return; }
-        currentIndex = index;
+        function activateDesktop(item) {
+            var index = item.dataset.index;
+            if (String(currentIndex) === String(index)) { return; }
+            currentIndex = index;
+            items.forEach(function (it) {
+                it.classList.toggle('is-active', it === item);
+            });
+            desktopVid.classList.add('is-fading');
+            clearTimeout(fadeTimer);
+            fadeTimer = setTimeout(function () {
+                desktopVid.pause();
+                desktopVid.setAttribute('poster', item.dataset.poster);
+                desktopVid.src = item.dataset.video;
+                desktopVid.load();
+                desktopVid.play().catch(function () {});
+                desktopVid.classList.remove('is-fading');
+            }, 220);
+        }
 
-        items.forEach(function (it) {
-            it.classList.toggle('is-active', it === item);
-        });
+        activateDesktop(items[0]);
 
-        video.classList.add('is-fading');
-        clearTimeout(fadeTimer);
-        fadeTimer = setTimeout(function () {
-            video.pause();
-            video.setAttribute('poster', item.dataset.poster);
-            video.src = item.dataset.video;
-            video.load();
-            video.play().catch(function () {});
-            video.classList.remove('is-fading');
-        }, 220);
+        if ('IntersectionObserver' in window) {
+            var desktopIO = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) { activateDesktop(entry.target); }
+                });
+            }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+            items.forEach(function (item) { desktopIO.observe(item); });
+        }
     }
 
-    activate(items[0]);
+    /* ════════════════════════════════════════════════════════
+       MOBILE stacked cards (< 992 px)
+       Each card has its own <video>.  We lazy-load the src and
+       play/pause via IntersectionObserver so only the clip
+       currently on-screen is consuming bandwidth.
+       ════════════════════════════════════════════════════════ */
+    var mobileVideos = document.querySelectorAll('.ops-mobile-video');
 
-    if (!('IntersectionObserver' in window)) { return; }
-
-    var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) { activate(entry.target); }
+    if (mobileVideos.length && 'IntersectionObserver' in window) {
+        var mobileIO = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                var vid = entry.target;
+                if (entry.isIntersecting) {
+                    /* Lazy-load: set src the first time the video enters view */
+                    if (!vid.src && vid.dataset.src) {
+                        vid.src = vid.dataset.src;
+                        vid.load();
+                    }
+                    vid.play().catch(function () {});
+                } else {
+                    vid.pause();
+                }
+            });
+        }, {
+            /* Start playing when 25 % of the video frame is visible */
+            threshold: 0.25
         });
-    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
 
-    items.forEach(function (item) { io.observe(item); });
+        mobileVideos.forEach(function (vid) { mobileIO.observe(vid); });
+    }
 });
 </script>

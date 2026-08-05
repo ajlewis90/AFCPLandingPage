@@ -1,8 +1,23 @@
 /* ══════════════════════════════════════════════════════════
    Operations Overview — Scroll Stack
-   Sticky video panel (single, reused <video> element) + scrolling
-   copy, one clip active at a time (Lassie.ai-style).
+   ──────────────────────────────────────────────────────────
+   DESKTOP (≥ 992 px):
+     Sticky video panel (65 % width, left) + scrolling copy (right).
+     Single <video> element; JS swaps src as copy items scroll past.
+
+   MOBILE (< 992 px):
+     Three fully-stacked cards. Each card: text on top, that clip's
+     video directly below. Natural scroll — no sticky, no swapping.
+     Each card has its own <video>; JS plays/pauses on scroll via IO.
    ══════════════════════════════════════════════════════════ */
+
+/* ── Layout visibility switches ─────────────────────────── */
+.ops-mobile-stack  { display: none; }   /* shown only on mobile  */
+.ops-desktop-stack { display: block; }  /* shown only on desktop */
+
+/* ════════════════════════════════════════════════════════════
+   DESKTOP SCROLL-STACK
+   ════════════════════════════════════════════════════════════ */
 
 .ops-scrollstack {
     display: flex;
@@ -10,20 +25,13 @@
     gap: 2.5rem;
 }
 
-/* ── Sticky media panel ──────────────────────────────────── */
+/* ── Sticky media panel (65 %) ───────────────────────────── */
 /*
-   WHY 65%:
-   The original was 44%, giving a ~490×480 px frame (nearly square).
-   A 16:9 demo video at 480 px tall needs 853 px wide to show every
-   pixel — meaning ~180 px was cropped from each side.  At 65% the
-   frame is ~780 px wide, so only ~36 px is cropped per side (4 %).
-   That residual loss hits blank margins/padding in the recording,
-   not UI content.  The video height stays exactly the same as before.
-   The text column (flex: 1) gets the remaining ~35%, which is still
-   comfortable for the short title + paragraph copy.
-
-   Navbar clearance (top) is overwritten by JS with the real measured
-   navbar height + 12 px gap so the sticky video never hides behind nav.
+   65 % keeps the video large enough that a 16:9 recording at the
+   original 480 px frame height loses only ~4 % from each side
+   (blank margin in most screen-recording UIs) while leaving
+   a comfortable 35 % column for the scrolling copy.
+   The actual top offset is written by JS from the real navbar height.
 */
 .ops-scrollstack-media {
     flex: 0 0 65%;
@@ -32,18 +40,10 @@
     align-self: flex-start;
 }
 
-/* ── Media frame ─────────────────────────────────────────── */
-/*
-   Restored to the ORIGINAL height formula.
-   object-fit: cover fills the frame completely — no black bars, ever.
-   At 65% panel width the frame is wide enough that cover crops only
-   ~4 % from each side of a 16:9 recording, which falls in the
-   blank border/padding area of most screen-recording UIs.
-*/
 .ops-media-frame {
     position: relative;
     width: 100%;
-    height: min(60vh, 480px);   /* original height — restored */
+    height: min(60vh, 480px);
     border-radius: 16px;
     overflow: hidden;
     background-color: #0f0f0f;
@@ -54,18 +54,16 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top; /* anchor top of video — original behaviour */
+    object-position: center top;
     display: block;
     pointer-events: none;
     opacity: 1;
     transition: opacity 0.22s ease;
 }
 
-.ops-stack-video.is-fading {
-    opacity: 0;
-}
+.ops-stack-video.is-fading { opacity: 0; }
 
-/* ── Scrolling copy ──────────────────────────────────────── */
+/* ── Scrolling copy (right column) ──────────────────────── */
 .ops-scrollstack-content {
     flex: 1;
     display: flex;
@@ -80,19 +78,11 @@
     opacity: 0.35;
     transition: opacity 0.4s ease;
 }
+.ops-scrollstack-item:first-child { min-height: 45vh; }
+.ops-scrollstack-item:last-child  { min-height: 45vh; }
+.ops-scrollstack-item.is-active   { opacity: 1; }
 
-.ops-scrollstack-item:first-child {
-    min-height: 45vh;
-}
-
-.ops-scrollstack-item:last-child {
-    min-height: 45vh;
-}
-
-.ops-scrollstack-item.is-active {
-    opacity: 1;
-}
-
+/* ── Shared text styles ──────────────────────────────────── */
 .ops-card-title {
     color: #ffffff;
     font-size: 1.75rem;
@@ -113,52 +103,89 @@
     font-weight: 600;
 }
 
-/* ── Responsive: stack fully on tablet/mobile ────────────── */
+/* ════════════════════════════════════════════════════════════
+   MOBILE STACKED CARDS  (< 992 px)
+   ════════════════════════════════════════════════════════════ */
+
 @media (max-width: 991px) {
-    .ops-scrollstack {
+
+    /* Switch visibility */
+    .ops-desktop-stack { display: none; }
+    .ops-mobile-stack  { display: block; }
+
+    /* Outer container — vertical rhythm between cards */
+    .ops-mobile-stack {
+        display: flex;
         flex-direction: column;
-        gap: 0;
+        gap: 3.5rem;
     }
 
-    .ops-scrollstack-media {
-        position: sticky;
-        top: 70px;      /* JS overrides with real navbar height */
-        flex: none;
-        width: 100%;
-        margin-bottom: 1.5rem;
-        z-index: 1;
+    /* Each card: text block above, video below */
+    .ops-mobile-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
     }
 
-    /* Full screen width on mobile = maximum possible video size */
-    .ops-media-frame {
-        height: min(48vh, 360px);
+    /* Text block */
+    .ops-mobile-text { }
+
+    .ops-mobile-text .ops-card-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
     }
 
-    .ops-scrollstack-item {
-        min-height: 40vh;
-    }
-
-    .ops-scrollstack-item:first-child,
-    .ops-scrollstack-item:last-child {
-        min-height: 30vh;
-    }
-
-    .ops-card-desc {
+    .ops-mobile-text .ops-card-desc {
         max-width: none;
+        font-size: 1rem;
+    }
+
+    /* Video frame — full width, 16:9 aspect, no black bars */
+    .ops-mobile-frame {
+        position: relative;
+        width: 100%;
+        /*
+          16:9 keeps the frame the same shape as most screen recordings.
+          object-fit:cover fills it edge-to-edge — no bars, no cropping
+          of content that falls within the centre of the frame.
+          Border-radius matches the dark section aesthetic.
+        */
+        aspect-ratio: 16 / 9;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: #0f0f0f;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .ops-mobile-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+        pointer-events: none;
     }
 }
 
+/* ── Small phones (≤ 576 px) ─────────────────────────────── */
 @media (max-width: 576px) {
-    .ops-media-frame {
-        height: min(44vh, 300px);
-        border-radius: 12px;
+    .ops-mobile-stack {
+        gap: 3rem;
     }
 
-    .ops-card-title {
-        font-size: 1.5rem;
+    .ops-mobile-card {
+        gap: 1rem;
     }
 
-    .ops-card-desc {
-        font-size: 1rem;
+    .ops-mobile-text .ops-card-title {
+        font-size: 1.35rem;
+    }
+
+    .ops-mobile-text .ops-card-desc {
+        font-size: 0.95rem;
+    }
+
+    .ops-mobile-frame {
+        border-radius: 10px;
     }
 }
