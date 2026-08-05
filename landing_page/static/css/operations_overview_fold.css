@@ -7,45 +7,45 @@
 .ops-scrollstack {
     display: flex;
     align-items: flex-start;
-    gap: 3rem;
+    gap: 2.5rem;
 }
 
 /* ── Sticky media panel ──────────────────────────────────── */
+/*
+   WHY 65%:
+   The original was 44%, giving a ~490×480 px frame (nearly square).
+   A 16:9 demo video at 480 px tall needs 853 px wide to show every
+   pixel — meaning ~180 px was cropped from each side.  At 65% the
+   frame is ~780 px wide, so only ~36 px is cropped per side (4 %).
+   That residual loss hits blank margins/padding in the recording,
+   not UI content.  The video height stays exactly the same as before.
+   The text column (flex: 1) gets the remaining ~35%, which is still
+   comfortable for the short title + paragraph copy.
+
+   Navbar clearance (top) is overwritten by JS with the real measured
+   navbar height + 12 px gap so the sticky video never hides behind nav.
+*/
 .ops-scrollstack-media {
-    /*
-      Widened from 44% → 58% so wide-ratio videos (e.g. 16:9 screen
-      recordings) get enough horizontal space to render at a large size
-      without needing to crop their sides.  Square or portrait videos
-      still look great because the frame height is driven by aspect-ratio
-      rather than a fixed pixel value.
-    */
-    flex: 0 0 58%;
+    flex: 0 0 65%;
     position: sticky;
-    top: 80px; /* JS overrides with measured navbar height + 12 px gap */
+    top: 80px;          /* JS overrides with measured navbar height + 12 px */
     align-self: flex-start;
 }
 
 /* ── Media frame ─────────────────────────────────────────── */
 /*
-   How this works:
-   1. JS reads videoWidth/videoHeight from loadedmetadata and writes
-      frame.style.aspectRatio = "W / H".
-   2. Because width:100% fills the 58% panel and aspect-ratio controls
-      height, the frame is always exactly the same shape as the video —
-      so object-fit:cover fills edge-to-edge with ZERO cropping on any
-      axis and ZERO black bars.
-   3. max-height stops the frame from exceeding the visible viewport
-      below the sticky navbar (JS also writes --ops-max-frame-h on resize).
-   4. Fallback 16/9 ratio is only visible for the fraction of a second
-      before the first video's metadata fires.
+   Restored to the ORIGINAL height formula.
+   object-fit: cover fills the frame completely — no black bars, ever.
+   At 65% panel width the frame is wide enough that cover crops only
+   ~4 % from each side of a 16:9 recording, which falls in the
+   blank border/padding area of most screen-recording UIs.
 */
 .ops-media-frame {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;               /* JS overwrites with real ratio  */
-    max-height: var(--ops-max-frame-h, min(60vh, 520px));
-    overflow: hidden;
+    height: min(60vh, 480px);   /* original height — restored */
     border-radius: 16px;
+    overflow: hidden;
     background-color: #0f0f0f;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
@@ -53,11 +53,8 @@
 .ops-stack-video {
     width: 100%;
     height: 100%;
-    /*
-      cover on a container whose ratio matches the video exactly =
-      fill everything, crop nothing, zero bars.
-    */
     object-fit: cover;
+    object-position: center top; /* anchor top of video — original behaviour */
     display: block;
     pointer-events: none;
     opacity: 1;
@@ -108,7 +105,7 @@
     font-size: 1.1rem;
     line-height: 1.7;
     margin-bottom: 0;
-    max-width: 420px;
+    max-width: 380px;
 }
 
 .ops-highlight {
@@ -116,7 +113,7 @@
     font-weight: 600;
 }
 
-/* ── Responsive: stack fully, drop the pin ───────────────── */
+/* ── Responsive: stack fully on tablet/mobile ────────────── */
 @media (max-width: 991px) {
     .ops-scrollstack {
         flex-direction: column;
@@ -125,18 +122,16 @@
 
     .ops-scrollstack-media {
         position: sticky;
-        top: 70px;  /* JS overrides with measured navbar height */
+        top: 70px;      /* JS overrides with real navbar height */
         flex: none;
         width: 100%;
         margin-bottom: 1.5rem;
         z-index: 1;
     }
 
-    /* On mobile the full width is already available, so the video
-       can be as wide as the screen allows.  max-height stops it
-       dominating a short screen. */
+    /* Full screen width on mobile = maximum possible video size */
     .ops-media-frame {
-        max-height: 50vh;
+        height: min(48vh, 360px);
     }
 
     .ops-scrollstack-item {
@@ -155,7 +150,7 @@
 
 @media (max-width: 576px) {
     .ops-media-frame {
-        max-height: 44vh;
+        height: min(44vh, 300px);
         border-radius: 12px;
     }
 

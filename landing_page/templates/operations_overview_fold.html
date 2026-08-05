@@ -27,9 +27,9 @@
             <div class="col-lg-11 col-xl-10">
                 <div class="ops-scrollstack" id="ops-scrollstack">
 
-                    <!-- Sticky media panel: a single video element, reused for all 3 clips -->
+                    <!-- Sticky media panel -->
                     <div class="ops-scrollstack-media" id="ops-scrollstack-media">
-                        <div class="ops-media-frame" id="ops-media-frame">
+                        <div class="ops-media-frame">
                             <video
                                 id="ops-stack-video"
                                 class="ops-stack-video"
@@ -42,7 +42,7 @@
                         </div>
                     </div>
 
-                    <!-- Scrolling copy — each item carries the video/poster it should load -->
+                    <!-- Scrolling copy -->
                     <div class="ops-scrollstack-content">
 
                         <div class="ops-scrollstack-item"
@@ -89,57 +89,25 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     var mediaPanel = document.getElementById('ops-scrollstack-media');
-    var frame      = document.getElementById('ops-media-frame');
     var stack      = document.getElementById('ops-scrollstack');
     var video      = document.getElementById('ops-stack-video');
 
-    if (!stack || !video || !frame || !mediaPanel) { return; }
+    if (!stack || !video || !mediaPanel) { return; }
 
-    /* ── 1. Dynamic navbar clearance ──────────────────────────────────
-       Reads the actual rendered navbar height and positions the sticky
-       panel just below it (+ 12 px gap).  Re-runs on resize / rotation. */
+    /* ── Navbar clearance ──────────────────────────────────────────────
+       Reads the actual rendered navbar height so the sticky video panel
+       always sits just below the nav bar, never behind it.
+       Recalculates on resize / orientation change. */
     function applyNavClearance() {
         var nav    = document.querySelector('nav.navbar');
         var navH   = nav ? Math.ceil(nav.getBoundingClientRect().height) : 70;
-        var offset = navH + 12;
-
-        mediaPanel.style.top = offset + 'px';
-
-        /* Safety cap: the video frame must never overflow below the
-           viewport.  We expose this as --ops-max-frame-h so the CSS
-           max-height rule can reference it. */
-        var maxH = window.innerHeight - offset - 16;
-        if (maxH > 80) {
-            document.documentElement.style.setProperty(
-                '--ops-max-frame-h', maxH + 'px'
-            );
-        }
+        mediaPanel.style.top = (navH + 12) + 'px';
     }
 
     applyNavClearance();
     window.addEventListener('resize', applyNavClearance);
 
-    /* ── 2. Match frame aspect-ratio to each video's actual dimensions ─
-       When the browser has read the video header (loadedmetadata), we
-       know videoWidth and videoHeight.  We write those back as the
-       frame's aspect-ratio so the container is always exactly the same
-       shape as the video.
-
-       Result: object-fit:cover fills the frame edge-to-edge with ZERO
-       cropping on any side AND zero black bars — because when the
-       container ratio equals the video ratio, cover and contain are
-       mathematically identical. */
-    function syncFrameRatio() {
-        var vw = video.videoWidth;
-        var vh = video.videoHeight;
-        if (vw && vh) {
-            frame.style.aspectRatio = vw + ' / ' + vh;
-        }
-    }
-
-    video.addEventListener('loadedmetadata', syncFrameRatio);
-
-    /* ── 3. Scroll-stack video switcher ──────────────────────────────── */
+    /* ── Video switcher ────────────────────────────────────────────────*/
     var items        = stack.querySelectorAll('.ops-scrollstack-item');
     var currentIndex = null;
     var fadeTimer    = null;
@@ -153,9 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
             it.classList.toggle('is-active', it === item);
         });
 
-        /* Fade out → swap source → fade back in.
-           loadedmetadata re-fires after each src swap, so syncFrameRatio
-           automatically updates the frame shape for every new clip. */
         video.classList.add('is-fading');
         clearTimeout(fadeTimer);
         fadeTimer = setTimeout(function () {
@@ -168,13 +133,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 220);
     }
 
-    /* Start on the first clip immediately. */
     activate(items[0]);
 
     if (!('IntersectionObserver' in window)) { return; }
 
-    /* Thin band across the vertical centre of the viewport.
-       Whichever copy block enters that band becomes active. */
     var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
             if (entry.isIntersecting) { activate(entry.target); }
