@@ -28,8 +28,8 @@
                 <div class="ops-scrollstack" id="ops-scrollstack">
 
                     <!-- Sticky media panel: a single video element, reused for all 3 clips -->
-                    <div class="ops-scrollstack-media">
-                        <div class="ops-media-frame">
+                    <div class="ops-scrollstack-media" id="ops-scrollstack-media">
+                        <div class="ops-media-frame" id="ops-media-frame">
                             <video
                                 id="ops-stack-video"
                                 class="ops-stack-video"
@@ -87,13 +87,62 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var stack = document.getElementById('ops-scrollstack');
-    var video = document.getElementById('ops-stack-video');
-    if (!stack || !video) { return; }
 
-    var items = stack.querySelectorAll('.ops-scrollstack-item');
+    var mediaPanel = document.getElementById('ops-scrollstack-media');
+    var frame      = document.getElementById('ops-media-frame');
+    var stack      = document.getElementById('ops-scrollstack');
+    var video      = document.getElementById('ops-stack-video');
+
+    if (!stack || !video || !frame || !mediaPanel) { return; }
+
+    /* ── 1. Dynamic navbar clearance ──────────────────────────────────
+       Reads the actual rendered navbar height and positions the sticky
+       panel just below it (+ 12 px gap).  Re-runs on resize / rotation. */
+    function applyNavClearance() {
+        var nav    = document.querySelector('nav.navbar');
+        var navH   = nav ? Math.ceil(nav.getBoundingClientRect().height) : 70;
+        var offset = navH + 12;
+
+        mediaPanel.style.top = offset + 'px';
+
+        /* Safety cap: the video frame must never overflow below the
+           viewport.  We expose this as --ops-max-frame-h so the CSS
+           max-height rule can reference it. */
+        var maxH = window.innerHeight - offset - 16;
+        if (maxH > 80) {
+            document.documentElement.style.setProperty(
+                '--ops-max-frame-h', maxH + 'px'
+            );
+        }
+    }
+
+    applyNavClearance();
+    window.addEventListener('resize', applyNavClearance);
+
+    /* ── 2. Match frame aspect-ratio to each video's actual dimensions ─
+       When the browser has read the video header (loadedmetadata), we
+       know videoWidth and videoHeight.  We write those back as the
+       frame's aspect-ratio so the container is always exactly the same
+       shape as the video.
+
+       Result: object-fit:cover fills the frame edge-to-edge with ZERO
+       cropping on any side AND zero black bars — because when the
+       container ratio equals the video ratio, cover and contain are
+       mathematically identical. */
+    function syncFrameRatio() {
+        var vw = video.videoWidth;
+        var vh = video.videoHeight;
+        if (vw && vh) {
+            frame.style.aspectRatio = vw + ' / ' + vh;
+        }
+    }
+
+    video.addEventListener('loadedmetadata', syncFrameRatio);
+
+    /* ── 3. Scroll-stack video switcher ──────────────────────────────── */
+    var items        = stack.querySelectorAll('.ops-scrollstack-item');
     var currentIndex = null;
-    var fadeTimer = null;
+    var fadeTimer    = null;
 
     function activate(item) {
         var index = item.dataset.index;
@@ -104,8 +153,9 @@ document.addEventListener('DOMContentLoaded', function () {
             it.classList.toggle('is-active', it === item);
         });
 
-        // Fade the (single) video out, swap its source once it's invisible,
-        // then fade back in. Only one clip is ever loaded at a time.
+        /* Fade out → swap source → fade back in.
+           loadedmetadata re-fires after each src swap, so syncFrameRatio
+           automatically updates the frame shape for every new clip. */
         video.classList.add('is-fading');
         clearTimeout(fadeTimer);
         fadeTimer = setTimeout(function () {
@@ -118,19 +168,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 220);
     }
 
-    // Start on the first clip immediately.
+    /* Start on the first clip immediately. */
     activate(items[0]);
 
     if (!('IntersectionObserver' in window)) { return; }
 
-    // A thin horizontal band across the vertical center of the viewport.
-    // Whichever copy block crosses that band becomes the active one —
-    // this is what keeps exactly one video "in focus" at a time as you scroll.
+    /* Thin band across the vertical centre of the viewport.
+       Whichever copy block enters that band becomes active. */
     var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                activate(entry.target);
-            }
+            if (entry.isIntersecting) { activate(entry.target); }
         });
     }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
 

@@ -7,32 +7,45 @@
 .ops-scrollstack {
     display: flex;
     align-items: flex-start;
-    gap: 3.5rem;
+    gap: 3rem;
 }
 
 /* ── Sticky media panel ──────────────────────────────────── */
 .ops-scrollstack-media {
-    /* TODO: set this to match your fixed navbar's real height exactly.
-       Other folds on this page (see header.masthead) clear the nav with
-       ~9rem of top padding, so that's the default here too. If the top
-       of the video is still hidden behind the navbar, increase this. */
-    --ops-nav-clearance: 9rem;
-
-    flex: 0 0 44%;
+    /*
+      Widened from 44% → 58% so wide-ratio videos (e.g. 16:9 screen
+      recordings) get enough horizontal space to render at a large size
+      without needing to crop their sides.  Square or portrait videos
+      still look great because the frame height is driven by aspect-ratio
+      rather than a fixed pixel value.
+    */
+    flex: 0 0 58%;
     position: sticky;
-    top: var(--ops-nav-clearance);
+    top: 80px; /* JS overrides with measured navbar height + 12 px gap */
     align-self: flex-start;
 }
 
-/* Height is capped with min() so the frame ALWAYS fits fully below the
-   sticky offset, no matter the window size — this is what stops the
-   video from getting visually cut off at the bottom of the screen. */
+/* ── Media frame ─────────────────────────────────────────── */
+/*
+   How this works:
+   1. JS reads videoWidth/videoHeight from loadedmetadata and writes
+      frame.style.aspectRatio = "W / H".
+   2. Because width:100% fills the 58% panel and aspect-ratio controls
+      height, the frame is always exactly the same shape as the video —
+      so object-fit:cover fills edge-to-edge with ZERO cropping on any
+      axis and ZERO black bars.
+   3. max-height stops the frame from exceeding the visible viewport
+      below the sticky navbar (JS also writes --ops-max-frame-h on resize).
+   4. Fallback 16/9 ratio is only visible for the fraction of a second
+      before the first video's metadata fires.
+*/
 .ops-media-frame {
     position: relative;
     width: 100%;
-    height: min(60vh, 480px);
-    border-radius: 16px;
+    aspect-ratio: 16 / 9;               /* JS overwrites with real ratio  */
+    max-height: var(--ops-max-frame-h, min(60vh, 520px));
     overflow: hidden;
+    border-radius: 16px;
     background-color: #0f0f0f;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
@@ -40,10 +53,13 @@
 .ops-stack-video {
     width: 100%;
     height: 100%;
+    /*
+      cover on a container whose ratio matches the video exactly =
+      fill everything, crop nothing, zero bars.
+    */
     object-fit: cover;
-    object-position: center top;
     display: block;
-    pointer-events: none; /* no player chrome / no hint it's clickable */
+    pointer-events: none;
     opacity: 1;
     transition: opacity 0.22s ease;
 }
@@ -69,11 +85,11 @@
 }
 
 .ops-scrollstack-item:first-child {
-    min-height: 45vh; /* first item doesn't need as much run-up */
+    min-height: 45vh;
 }
 
 .ops-scrollstack-item:last-child {
-    min-height: 45vh; /* nor does the last one need trailing space */
+    min-height: 45vh;
 }
 
 .ops-scrollstack-item.is-active {
@@ -92,7 +108,7 @@
     font-size: 1.1rem;
     line-height: 1.7;
     margin-bottom: 0;
-    max-width: 480px;
+    max-width: 420px;
 }
 
 .ops-highlight {
@@ -109,15 +125,18 @@
 
     .ops-scrollstack-media {
         position: sticky;
-        top: 5rem; /* mobile navbar clearance — tune alongside --ops-nav-clearance above */
+        top: 70px;  /* JS overrides with measured navbar height */
         flex: none;
         width: 100%;
         margin-bottom: 1.5rem;
         z-index: 1;
     }
 
+    /* On mobile the full width is already available, so the video
+       can be as wide as the screen allows.  max-height stops it
+       dominating a short screen. */
     .ops-media-frame {
-        height: min(42vh, 340px);
+        max-height: 50vh;
     }
 
     .ops-scrollstack-item {
@@ -136,7 +155,7 @@
 
 @media (max-width: 576px) {
     .ops-media-frame {
-        height: min(38vh, 300px);
+        max-height: 44vh;
         border-radius: 12px;
     }
 
