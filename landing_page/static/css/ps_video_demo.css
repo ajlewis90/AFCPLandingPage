@@ -3,34 +3,55 @@
    Add this to problem_solution_fold.css
    ============================================ */
 
+/* Natural-ratio rendering — no cropping, no black bands.
+   See the comment in problem_solution_fold.css for full
+   explanation of the width:auto / height:auto technique. */
+
 .ps-video-demo {
     width: 100%;
+    text-align: center;     /* centres the inline-block wrapper */
 }
 
 .ps-video-wrapper {
-    position: relative;
-    width: 100%;
+    display: inline-block;  /* shrink-wraps to video's natural size */
     max-width: 100%;
+    position: relative;
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
-    background: #000;
     box-sizing: border-box;
+    vertical-align: top;
+    line-height: 0;         /* removes phantom inline gap below video */
 }
 
 .ps-video {
     display: block;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    max-height: 600px;
-    object-fit: contain;
-    background: #000;
+    width: auto;            /* \                                      */
+    height: auto;           /*  > both auto = ratio always preserved  */
+    max-width: 100%;        /* /  while max-* constraints are applied */
+    max-height: 55vh;       /* keeps entire video on-screen           */
     box-sizing: border-box;
+    pointer-events: none;
+}
+
+@media (max-width: 991px) {
+    .ps-video {
+        max-height: 50vh;
+    }
 }
 
 @media (max-width: 768px) {
     .ps-video-wrapper {
         border-radius: 10px;
+    }
+
+    .ps-video {
+        max-height: 45vh;
+    }
+}
+
+@media (max-width: 576px) {
+    .ps-video {
+        max-height: 42vh;
     }
 }
