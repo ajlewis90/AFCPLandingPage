@@ -13,7 +13,7 @@
         <div class="row justify-content-center mb-5">
             <div class="col-lg-10 col-xl-8 text-center">
                 <h2 class="mission" style="color: #ffffff; font-size: 3rem; font-weight: 700; margin-bottom: 1.25rem;">
-                    Leading agentic e-commerce platform
+                    See the Agentic Platform in action
                 </h2>
                 <p class="banner-text" style="color: rgba(255, 255, 255, 0.7); font-size: 1.1rem; line-height: 1.7;">
                     We help retailers build a shopper agent for their storefront.
@@ -52,7 +52,7 @@
                             <h4 class="ops-card-title">Four Pillars, One Agent</h4>
                             <p class="ops-card-desc">
                                 <span class="ops-highlight">Increased bottom line, customer engagement, customer support and payments with reduced operational costs.</span>
-                                No manuals. <span class="ops-highlight">Just ask our AI</span> and get instant answers on profits, sales and revenue.
+                                No manuals. <span class="ops-highlight">Just ask our Agent</span> and get instant answers on profits, sales and revenue.
                             </p>
                         </div>
 
@@ -74,7 +74,7 @@
                              data-poster="{% static 'media/visibility-support-helpdesk-placeholder.jpg' %}">
                             <h4 class="ops-card-title">Payments &amp; Support Handled</h4>
                             <p class="ops-card-desc">
-                                Our AI takes care of your support tickets, refunds &amp; returns. We ensure secure checkout and payment processing.
+                                Our Agent takes care of your support tickets, refunds &amp; returns. We ensure secure checkout and payment processing.
                             </p>
                         </div>
 
@@ -93,7 +93,7 @@
                     <h4 class="ops-card-title">Four Pillars, One Agent</h4>
                     <p class="ops-card-desc">
                         <span class="ops-highlight">Increased bottom line, customer engagement, customer support and payments with reduced operational costs.</span>
-                        No manuals. <span class="ops-highlight">Just ask our AI</span> and get instant answers on profits, sales and revenue.
+                        No manuals. <span class="ops-highlight">Just ask our Agent</span> and get instant answers on profits, sales and revenue.
                     </p>
                 </div>
                 <div class="ops-mobile-frame">
@@ -127,7 +127,7 @@
                 <div class="ops-mobile-text">
                     <h4 class="ops-card-title">Payments &amp; Support Handled</h4>
                     <p class="ops-card-desc">
-                        Our AI takes care of your support tickets, refunds &amp; returns. We ensure secure checkout and payment processing.
+                        Our Agent takes care of your support tickets, refunds &amp; returns. We ensure secure checkout and payment processing.
                     </p>
                 </div>
             </div>
@@ -136,6 +136,40 @@
 
     </div>
 </section>
+
+
+    <!-- Solution Demo Video Block -->
+    <section class="py-5" style="background-color: #1d1d1d !important;">
+        <div class="container-fluid px-7 mid-container">
+            <div class="row justify-content-center mb-4">
+                <div class="col-lg-10 col-xl-8 text-center">
+                    <h2 class="fold-subtitle" style="color: #ffffff; font-weight: 700; margin-bottom: 1rem;">See the Shopper Agent in action</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-7 ps-video-col">
+                    <div class="ps-demo-video-frame">
+                        <!-- Sierra-style: no controls, muted + looping, only loads/plays
+                             once scrolled into view. Poster shows instantly so there's
+                             no blank flash while the clip loads. -->
+                        <video
+                            id="ps-demo-video"
+                            class="ps-lazy-video"
+                            aria-label="AFCP Shopper Agent solution demo video"
+                            muted
+                            loop
+                            playsinline
+                            preload="none"
+                            poster="{% static 'media/afcp-lego-toys-order-placeholder.jpg' %}">
+                            <source data-src="{% static 'media/afcp-lego-toys-order.webm' %}" type="video/webm">
+                            <source data-src="{% static 'media/afcp-lego-toys-order.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
