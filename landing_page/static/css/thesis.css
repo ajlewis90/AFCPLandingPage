@@ -322,6 +322,16 @@ body .row {
     margin: 0;
 }
 
+.vision-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.7;
+    color: rgba(245,245,240,0.75) !important;
+    max-width: 640px;
+    margin: 0;
+}
+
 /* Nav clearance now lives on .who-are-we, so the hero after it needs less */
 .who-are-we + .thesis-hero { padding-top: 5rem; }
 
