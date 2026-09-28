@@ -1,0 +1,35 @@
+    "@id": "https://afcp.ai/#organization",
+    "name": "AFCP AI"
+  },
+  "url": "https://afcp.ai/our-thesis/",
+  "isPartOf": {
+    "@type": "WebSite",
+    "url": "https://afcp.ai"
+  },
+  "about": [
+    { "@type": "Thing", "name": "Efficient AI", "description": "AI that is like electricity — scalable, affordable and reliable — consuming fewer chips, compute and energy than LLM-first approaches." },
+    { "@type": "Thing", "name": "Experiential AI", "description": "A new AI paradigm focused on building human-first, collaborative and self-learning agents. Contrasted with Generative AI, Experiential AI agents learn continuously from real-world experience and human intervention." },
+    { "@type": "Thing", "name": "Agentic Commerce", "description": "The next evolution of ecommerce where AI shopper agents handle product discovery, personalisation, checkout and retail operations autonomously on behalf of consumers and businesses." },
+    { "@type": "Thing", "name": "Agentic Internet", "description": "A reimagined internet where consumers and businesses interact directly with agents via voice, text or video, built on the existing Web1/Web2/Web3 backbone with an agentic layer on top." }
+  ],
+  "keywords": [
+    "Efficient AI",
+    "Experiential AI",
+    "Agentic Commerce",
+    "Agentic Internet",
+    "shopper agent",
+    "LLM-first paradigm",
+    "agent-first approach",
+    "hybrid AI architecture",
+    "compute efficiency",
+    "self-learning agents",
+    "AFCP AI thesis",
+    "DC vs AC AI analogy",
+    "artificial shopper mind",
+    "ecommerce AI agents"
+  ],
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".thesis-title", ".thesis-tagline", ".pull-quote p", ".section-heading"]
+  }
+},
