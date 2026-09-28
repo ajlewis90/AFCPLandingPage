@@ -561,10 +561,51 @@
             .thesis-join { padding: 3rem 1.5rem; }
             .thesis-meta { gap: 1.5rem; }
         }
+        /* ── Who are we? (top-of-page intro) ── */
+        .who-are-we {
+            background-color: #1d1d1d;
+            padding: 10rem 0 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .who-are-we-heading {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2.2rem, 4vw, 3.4rem);
+            font-weight: 400;
+            line-height: 1.15;
+            color: #f5f5f0 !important;
+            margin: 0 0 1.5rem;
+        }
+
+        .who-are-we-text {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: rgba(245,245,240,0.75) !important;
+            max-width: 640px;
+            margin: 0;
+        }
+
+        /* Nav clearance now lives on .who-are-we, so the hero after it needs less */
+        .who-are-we + .thesis-hero { padding-top: 5rem; }
+
+        @media (max-width: 768px) {
+            .who-are-we { padding: 8rem 0 3rem; }
+            .who-are-we + .thesis-hero { padding-top: 3rem; }
+        }
     </style>
 </head>
 <body>
     {% include 'landing_page_navigation.html' %}
+
+    <!-- ── Who are we? ── -->
+    <section class="who-are-we">
+        <div class="thesis-container">
+            <h2 class="who-are-we-heading">Who are we?</h2>
+            <p class="who-are-we-text">AFCP AI research lab building the foundational platform for creating efficient agents on the internet.</p>
+        </div>
+    </section>
 
     <!-- ── Hero ── -->
     <section class="thesis-hero">
