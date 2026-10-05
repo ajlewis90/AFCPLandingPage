@@ -121,23 +121,9 @@
   {% include 'landing_page_navigation.html' %}
 
 
-    <!-- Fold 1: Hero Image -->
-    <section class="pt-8" id="home-old">
-           <div class="container-fluid">
-               <div class="row justify-content-center">
-                  <div class="col-lg-10 col-xl-8">
-                      <div class="hero-content-wrapper">
-                          <div class="hero-image-block">
-                              <img src="{% static 'img/hero-river-of-days-title.png' %}" class="img-fluid rounded" alt="Community enjoying free time while shopper agents handle the work" style="max-width: 100%; height: auto;" />
-                          </div>
-                      </div>
-                  </div>
-               </div>
-           </div>
-       </section>
 
-    <!-- Fold 2: Hero Title, Copy & CTA -->
-    <section class="py-5" id="hero-content-fold">
+    <!-- Fold 1: Hero Title, Copy & CTA -->
+    <section class="pt-8" id="hero-content-fold">
            <div class="container-fluid">
                <div class="row justify-content-center">
                   <div class="col-lg-10 col-xl-8">
@@ -177,6 +163,20 @@
        {% include 'agentic_commerce_os.html' %}
 
 
+      <!-- Fold: Hero Image -->
+      <section class="py-5" id="home-old">
+             <div class="container-fluid">
+                 <div class="row justify-content-center">
+                    <div class="col-lg-10 col-xl-8">
+                        <div class="hero-content-wrapper">
+                            <div class="hero-image-block">
+                                <img src="{% static 'img/hero-river-of-days-title.png' %}" class="img-fluid rounded" alt="Community enjoying free time while shopper agents handle the work" style="max-width: 100%; height: auto;" />
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+             </div>
+         </section>
 
        {% include 'developer_experience_fold.html' %}
 
