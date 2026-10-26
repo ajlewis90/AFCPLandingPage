@@ -152,17 +152,22 @@
                         <!-- Sierra-style: no controls, muted + looping, only loads/plays
                              once scrolled into view. Poster shows instantly so there's
                              no blank flash while the clip loads. -->
+                        <!-- Lazy-loaded, looping demo. Native controls give the user mute/unmute.
+                             Starts muted only if the browser blocks autoplay with sound. -->
                         <video
                             id="ps-demo-video"
-                            class="ps-lazy-video"
+                            class="ps-demo-video"
                             aria-label="AFCP Shopper Agent solution demo video"
-                            muted
+                            controls
+                            controlsList="nodownload noplaybackrate"
+                            disablePictureInPicture
+                            oncontextmenu="return false;"
                             loop
                             playsinline
                             preload="none"
-                            poster="{% static 'media/afcp-lego-toys-order-placeholder.jpg' %}">
-                            <source data-src="{% static 'media/afcp-lego-toys-order.webm' %}" type="video/webm">
-                            <source data-src="{% static 'media/afcp-lego-toys-order.mp4' %}" type="video/mp4">
+                            poster="{% static 'media/afcp-toys-and-shoes-order-placeholder.png' %}">
+                            <source src="{% static 'media/afcp-toys-and-shoes-order.webm' %}" type="video/webm">
+                            <source src="{% static 'media/afcp-toys-and-shoes-order.mp4' %}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
