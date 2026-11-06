@@ -1,8 +1,8 @@
 {% load static %}
-<nav class="navbar navbar-expand-md navbar-light bg-custom-green fixed-top sticky-navigation">
+<nav class="navbar navbar-expand-md navbar-light bg-custom-green fixed-top sticky-navigation" aria-label="Main navigation">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'landing_page:landing_page' %}">
-            <img style="max-width:200px;" src="{% static 'img/afcp-color-logo-no-background.png' %}" alt="AFCP monochrome color logo without background">
+        <a class="navbar-brand" href="{% url 'landing_page:landing_page' %}" title="AFCP AI - Foundational infrastructure for agentic commerce">
+            <img style="max-width:200px;" src="{% static 'img/afcp-color-logo-no-background.png' %}" alt="AFCP AI logo - foundational infrastructure for agentic commerce">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -10,10 +10,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'landing_page:our_thesis' %}">Our Thesis</a>
+                        <a class="nav-link" href="{% url 'landing_page:our_thesis' %}" title="Our thesis on foundational infrastructure for agentic commerce">Our Thesis</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#business-signup">Book a Demo</a>
+                        <a class="nav-link" href="#business-signup" title="Book a demo of AFCP's agentic commerce infrastructure">Book a Demo</a>
                     </li>                           
             </ul>
         </div>      
